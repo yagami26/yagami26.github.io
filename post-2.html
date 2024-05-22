@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, width=device-width, user-scalable=no" />
+    <title>noob golang dev - strings are hell, loops are amazing in golang — code((chords) -> cardio)::io</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!--[if lte IE 8]><script type="text/javascript" src="/theme/js/html5shiv.js"></script><![endif]-->
+    <link rel="stylesheet" type="text/css" href="/theme/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/theme/css/theme.css" />
+    <link rel="shortcut icon" type="image/png" href="/favicon.png" />
+    <!--[if lte IE 8]><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" /><![endif]-->
+    <link rel="alternate" type="application/atom+xml"
+                           title="code((chords) -> cardio)::io — Flux Atom"
+                           href="/" /> 
+
+    <meta name="author"   content="khirod" />
+    <meta name="keywords" content="golang, syntax" />
+    <link rel="stylesheet" media="not print" type="text/css" href="/theme/css/pygments.css" /> 
+  </head>
+  <body>
+    <div class="container" id="page">
+      <header id="page-head">
+        <h1>
+          <a href="/index.html">code((chords) -> cardio)::io</a>
+        </h1>
+      </header>
+      
+      <div class="row" id="page-body">
+        <aside class="col-md-2" id="page-side">
+          <!-- begin includes/sidebar.html -->
+          <nav>
+            <h3>Pages</h3>
+            <ul>
+              <li><a href="/archives.html">Archive</a></li>
+              <li><a href="/tags.html">Tags</a></li>
+              <li><a href="/pages/about.html">About</a></li>
+            </ul>
+          </nav>
+
+          <nav>
+            <h3>Categories</h3>
+            <ul>
+              <li class="active"><a href="/category/technology.html">Technology</a></li>
+            </ul>
+          </nav>
+
+          <nav>
+            <h3>Social</h3>
+            <ul>
+              <li><a href="https://linkedin.com/in/khirodkantnaik">Linkedin</a></li>
+              <li><a href="https://youtube.com/@placeholder2128">Youtube</a></li>
+            </ul>
+          </nav>
+
+          <nav>
+            <h3>Blogroll</h3>
+            <ul>
+              <li><a href="https://getpelican.com/">Pelican</a></li>
+            </ul>
+          </nav>
+          <!-- end includes/sidebar.html --></aside> <!-- /#page-side -->
+
+       <div class="col-md-8 col-md-ofset-2">
+       <article class="post" id="page-main" role="main">
+      <header class="post-header">
+        <h1>
+          <a rel="bookmark"
+             href="/post-2.html"
+             title="Permanent Version noob golang dev - strings are hell, loops are amazing in golang">
+             noob golang dev - strings are hell, loops are amazing in golang
+          </a>
+        </h1>
+        <div class="meta">
+<!-- includes/article_meta.html -->
+            <time datetime="2024-05-22T21:48:00+05:30">Wed 22 May 2024</time>
+            <a href="/category/technology.html">Technology</a>
+            by <a href="/author/khirod.html">khirod</a>              <br />Tags:              <a rel="tag" href="/tag/golang.html">golang</a>,               <a rel="tag" href="/tag/syntax.html">syntax</a>        </div>
+      </header>
+      <div class="post-content"> 
+        <p>I have started practicing the leetcode Programming Skills study plan. To grasp a language quickly, it has progressive set of exercises. I started with a problem where you were given two strings and you had to merge them alternatively, eg - <code>word1 - "Hello"</code> and <code>word2 - "World"</code> then the function should return a concatenated string <code>"HWeolrllod"</code>.  </p>
+<p>Here is the code which I came up with  </p>
+<div class="highlight"><pre><span></span><code><span class="n">package</span><span class="w"> </span><span class="n">main</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="s2">&quot;fmt&quot;</span>
+
+<span class="n">func</span><span class="w"> </span><span class="n">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">const</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="n">word1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Hello&quot;</span>
+<span class="w">        </span><span class="n">word2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;World&quot;</span>
+<span class="w">    </span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">mergeStringsAlternatively</span><span class="p">(</span><span class="n">word1</span><span class="p">,</span><span class="w"> </span><span class="n">word2</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="n">func</span><span class="w"> </span><span class="n">mergeStringsAlternatively</span><span class="p">(</span><span class="n">word1</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">word2</span><span class="w"> </span><span class="n">string</span><span class="p">)</span><span class="w"> </span><span class="n">string</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">word1Len</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">word1</span><span class="p">)</span>
+<span class="w">    </span><span class="n">word2Len</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">word2</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="nv">mergedString</span><span class="w"> </span><span class="n">string</span>
+<span class="w">    </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">word1Len</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">word2Len</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">mergedString</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">string</span><span class="p">(</span><span class="n">word1</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="w">        </span><span class="n">mergedString</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">string</span><span class="p">(</span><span class="n">word2</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">word1Len</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">mergedString</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">string</span><span class="p">(</span><span class="n">word1</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">word2Len</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">mergedString</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">string</span><span class="p">(</span><span class="n">word2</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">mergedString</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>While doing the problem I found out there are some really cool ways to use <code>for</code> in Golang. As I come from C like languages and Java background a <code>while</code> loop has been pretty much ingrained into my body. I do think Go has done a remarkable job capturing the essence of <code>while</code> loops with a <code>for</code> style loop.  </p>
+<p>Notice how the declaration can be done independently outside of <code>for</code> construct, and how both variables <code>i,j</code> can be incremented together. Definitely impressed with the construct. <code>string</code> on the other hand gave me pretty much a headache. I think the problem is that I started asking Gemini. <code>rune</code>, <code>byte</code>, <code>slice of runes</code> and a lot of things I tried resulted in failure. I'm sure this will get easier with time as I learn the internals, but for the time I will still keep my opinion that strings in golang are hell.</p>
+      </div>
+      <footer class="post-footer">
+        <div class="meta">
+            Written by <a href="/author/khirod.html">khirod</a> in 
+            <a href="/category/technology.html">Technology</a>
+            on <time datetime="2024-05-22T21:48:00+05:30">Wed 22 May 2024</time>
+            Tags:  <a href="/tag/golang.html">golang</a> <a href="/tag/syntax.html">syntax</a>        </div>
+      </footer>
+       </article> <!-- /#page-main -->
+       </div>
+
+      </div>  <!-- /#page-body -->
+
+      <footer id="page-foot">
+        <p> Powered by <a href="http://pelican.readthedocs.org">Pelican</a></p>
+      </footer>
+    </div> <!-- /#page -->
+
+  </body>
+</html>
