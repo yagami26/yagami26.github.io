@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, width=device-width, user-scalable=no" />
+    <title>external monitor setup with qtile, x11 on arch linux — code((chords) -> cardio)::io</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!--[if lte IE 8]><script type="text/javascript" src="/theme/js/html5shiv.js"></script><![endif]-->
+    <link rel="stylesheet" type="text/css" href="/theme/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/theme/css/theme.css" />
+    <link rel="shortcut icon" type="image/png" href="/favicon.png" />
+    <!--[if lte IE 8]><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" /><![endif]-->
+    <link rel="alternate" type="application/atom+xml"
+                           title="code((chords) -> cardio)::io — Flux Atom"
+                           href="/" /> 
+
+    <meta name="author"   content="khirod" />
+    <meta name="keywords" content="linux, qtile" />
+    <link rel="stylesheet" media="not print" type="text/css" href="/theme/css/pygments.css" /> 
+  </head>
+  <body>
+    <div class="container" id="page">
+      <header id="page-head">
+        <h1>
+          <a href="/index.html">code((chords) -> cardio)::io</a>
+        </h1>
+      </header>
+      
+      <div class="row" id="page-body">
+        <aside class="col-md-2" id="page-side">
+          <!-- begin includes/sidebar.html -->
+          <nav>
+            <h3>Pages</h3>
+            <ul>
+              <li><a href="/archives.html">Archive</a></li>
+              <li><a href="/tags.html">Tags</a></li>
+              <li><a href="/pages/about.html">About</a></li>
+            </ul>
+          </nav>
+
+          <nav>
+            <h3>Categories</h3>
+            <ul>
+              <li class="active"><a href="/category/technology.html">Technology</a></li>
+            </ul>
+          </nav>
+
+          <nav>
+            <h3>Social</h3>
+            <ul>
+              <li><a href="https://linkedin.com/in/khirodkantnaik">Linkedin</a></li>
+              <li><a href="https://youtube.com/@placeholder2128">Youtube</a></li>
+            </ul>
+          </nav>
+
+          <nav>
+            <h3>Blogroll</h3>
+            <ul>
+              <li><a href="https://getpelican.com/">Pelican</a></li>
+            </ul>
+          </nav>
+          <!-- end includes/sidebar.html --></aside> <!-- /#page-side -->
+
+       <div class="col-md-8 col-md-ofset-2">
+       <article class="post" id="page-main" role="main">
+      <header class="post-header">
+        <h1>
+          <a rel="bookmark"
+             href="/post-5.html"
+             title="Permanent Version external monitor setup with qtile, x11 on arch linux">
+             external monitor setup with qtile, x11 on arch linux
+          </a>
+        </h1>
+        <div class="meta">
+<!-- includes/article_meta.html -->
+            <time datetime="2024-05-26T20:49:00+05:30">Sun 26 May 2024</time>
+            <a href="/category/technology.html">Technology</a>
+            by <a href="/author/khirod.html">khirod</a>              <br />Tags:              <a rel="tag" href="/tag/linux.html">linux</a>,               <a rel="tag" href="/tag/qtile.html">qtile</a>        </div>
+      </header>
+      <div class="post-content"> 
+        <p>I was thinking of how to use an external monitor in the vertical setup, although I was able to achieve the intented setup a little bit, I'm still not sure how I am going to use it <em>Haha</em>. But I also learnt a lot about Qtile api and how things work on X11.  </p>
+<p>So to achieve this setup, first I needed to use <code>xrandr</code> to achieve a vertical orientation of external monitor to the right of my laptop. To generate a script with the orientation I used <code>arandr</code> which is a GUI tool and can generate the <code>xrandr</code> script to initialize the external monitor.arandr generated the below script, and you can see how HDMI-1 is rotated right and the exact position of monitor   </p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/bin/sh</span>
+xrandr<span class="w"> </span>--output<span class="w"> </span>eDP-1<span class="w"> </span>--primary<span class="w"> </span>--mode<span class="w"> </span>2880x1800<span class="w"> </span>--pos<span class="w"> </span>0x0<span class="w"> </span>--rotate<span class="w"> </span>normal<span class="w"> </span>--output<span class="w"> </span>HDMI-1<span class="w"> </span>--mode<span class="w"> </span>1920x1080<span class="w"> </span>--pos<span class="w"> </span>2927x0<span class="w"> </span>--rotate<span class="w"> </span>right<span class="w"> </span>--output<span class="w"> </span>DP-1<span class="w"> </span>--off<span class="w"> </span>--output<span class="w"> </span>DP-2<span class="w"> </span>--off
+</code></pre></div></td></tr></table></div>
+
+<p>Next step was configuring Qtile window manager, which was a little tricky. Basically I needed Qtile to do 3 things</p>
+<ul>
+<li>Have 3 groups <code>7, 8, 9</code> on the new monitor, while group <code>1..6</code> should stay on laptop screen</li>
+<li>Seamlessly able to switch groups without losing the focus on any screen. For eg - if I have a terminal opened on group 1 (laptop screen), and a browser opened on group 7 (external monitor), then switching to group 7, should not change the content of group1 in any way. </li>
+</ul>
+<p>I had to hack and wander around a lot but I was able to achieve this with following configs  </p>
+<div class="highlight"><pre><span></span><code><span class="n">groupbox1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">widget</span><span class="p">.</span><span class="n">GroupBox</span><span class="p">(</span><span class="n">visible_groups</span><span class="o">=[</span><span class="n">&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;, &#39;8&#39;, &#39;9&#39;</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">highlight_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;block&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">padding_x</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+<span class="n">groupbox2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">widget</span><span class="p">.</span><span class="n">GroupBox</span><span class="p">(</span><span class="n">visible_groups</span><span class="o">=[</span><span class="n">&#39;7&#39;, &#39;8&#39;, &#39;9&#39;</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">highlight_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;block&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">padding_x</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+
+<span class="nv">@hook</span><span class="p">.</span><span class="n">subscribe</span><span class="p">.</span><span class="n">screens_reconfigured</span>
+<span class="n">async</span><span class="w"> </span><span class="n">def</span><span class="w"> </span><span class="n">_</span><span class="p">()</span><span class="err">:</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nf">len</span><span class="p">(</span><span class="n">qtile</span><span class="p">.</span><span class="n">screens</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="err">:</span>
+<span class="w">        </span><span class="n">groupbox1</span><span class="p">.</span><span class="n">visible_groups</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;</span><span class="o">]</span>
+<span class="w">    </span><span class="k">else</span><span class="err">:</span>
+<span class="w">        </span><span class="n">groupbox1</span><span class="p">.</span><span class="n">visible_groups</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;, &#39;8&#39;, &#39;9&#39;</span><span class="o">]</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">hasattr</span><span class="p">(</span><span class="n">groupbox1</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;bar&#39;</span><span class="p">)</span><span class="err">:</span>
+<span class="w">        </span><span class="n">groupbox1</span><span class="p">.</span><span class="n">bar</span><span class="p">.</span><span class="n">draw</span><span class="p">()</span>
+</code></pre></div>
+
+<p>This piece of code defines the groups and hooks I needed to use. The qtile hook <code>screens_reconfigured</code> gets invoked whenever there is a change in xrandr output.  </p>
+<p>Notice the multiple groupboxes, these are defined so that when if only laptop screen is active we show all the groups, otherwise we split groups between laptop and monitor.  </p>
+<p>The screen section of config get updated to something like this  </p>
+<div class="highlight"><pre><span></span><code><span class="n">Screen</span><span class="p">(</span>
+<span class="w">    </span><span class="n">top</span><span class="o">=</span><span class="n">bar</span><span class="o">.</span><span class="n">Bar</span><span class="p">(</span>
+<span class="w">        </span><span class="p">[</span>
+<span class="w">            </span><span class="n">groupbox1</span><span class="p">,</span>
+<span class="w">            </span><span class="o">.....</span>
+<span class="w">            </span><span class="o">//</span><span class="n">rest</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">widgets</span>
+
+
+
+<span class="p">),</span>
+
+<span class="n">Screen</span><span class="p">(</span>
+<span class="w">    </span><span class="n">top</span><span class="o">=</span><span class="n">bar</span><span class="o">.</span><span class="n">Bar</span><span class="p">(</span>
+<span class="w">        </span><span class="p">[</span>
+<span class="w">            </span><span class="n">groupbox2</span><span class="p">,</span>
+<span class="w">            </span><span class="c1">#widget.GroupBox(highlight_method = &quot;block&quot;, padding_x=5, fontsize=25, visible_groups=[&#39;7&#39;, &#39;8&#39;, &#39;9&#39;]),</span>
+<span class="w">            </span><span class="n">widget</span><span class="o">.</span><span class="n">WindowName</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="n">bar_font_size</span><span class="p">),</span>
+<span class="w">            </span><span class="n">widget</span><span class="o">.</span><span class="n">Clock</span><span class="p">(</span><span class="n">format</span><span class="o">=</span><span class="s2">&quot;%a %I:%M %p&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">fontsize</span><span class="o">=</span><span class="n">bar_font_size</span><span class="p">)</span>
+<span class="w">        </span><span class="p">],</span>
+<span class="w">        </span><span class="mi">35</span><span class="p">,</span>
+<span class="w">        </span><span class="n">margin</span><span class="o">=</span><span class="p">[</span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">],</span>
+<span class="w">        </span><span class="c1">#border_width=[2, 0, 2, 0],  # Draw top and bottom borders</span>
+<span class="w">        </span><span class="c1">#background=&quot;#00000000&quot;,</span>
+<span class="w">        </span><span class="c1">#border_width=[2, 0, 2, 0],  # Draw top and bottom borders</span>
+<span class="w">        </span><span class="c1">#border_color=[&quot;ff00ff&quot;, &quot;000000&quot;, &quot;ff00ff&quot;, &quot;000000&quot;]  # Borders are magenta</span>
+<span class="w">    </span><span class="p">),</span>
+<span class="w">    </span><span class="n">wallpaper</span><span class="o">=</span><span class="s2">&quot;/home/ryuk/Downloads/dragon-ball-kid-goku-moon-halloween-wallpaper-scaled.jpg&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">wallpaper_mode</span><span class="o">=</span><span class="s2">&quot;fill&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="c1"># You can uncomment this variable if you see that on X11 floating resize/moving is laggy</span>
+<span class="w">    </span><span class="c1"># By default we handle these events delayed to already improve performance, however your system might still be struggling</span>
+<span class="w">    </span><span class="c1"># This variable is set to None (no cap) by default, but you can set it to 60 to indicate that you limit it to 60 events per second</span>
+<span class="w">    </span><span class="c1"># x11_drag_polling_rate = 60,</span>
+<span class="p">),</span>
+</code></pre></div>
+
+<p>Notice now we have 2 screens in config, and the second screen also takes a wallpaper parameter to automatically use a vertical monitor when it is connected and set the wallpaper.  </p>
+<p>The real magic of switching however happens with below keybindings I use for Qtile, they check for available screens and if the length of screens list is greater than 1, then switching works</p>
+<div class="highlight"><pre><span></span><code><span class="n">def</span><span class="w"> </span><span class="n">go_to_group</span><span class="p">(</span><span class="nl">name</span><span class="p">:</span><span class="w"> </span><span class="nf">str</span><span class="p">)</span><span class="err">:</span>
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">_inner</span><span class="p">(</span><span class="n">qtile</span><span class="p">)</span><span class="err">:</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nf">len</span><span class="p">(</span><span class="n">qtile</span><span class="p">.</span><span class="n">screens</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="err">:</span>
+<span class="w">            </span><span class="n">qtile</span><span class="p">.</span><span class="n">groups_map</span><span class="o">[</span><span class="n">name</span><span class="o">]</span><span class="p">.</span><span class="n">toscreen</span><span class="p">()</span>
+<span class="w">            </span><span class="k">return</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="s1">&#39;123&#39;</span><span class="err">:</span>
+<span class="w">            </span><span class="n">qtile</span><span class="p">.</span><span class="n">focus_screen</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">            </span><span class="n">qtile</span><span class="p">.</span><span class="n">groups_map</span><span class="o">[</span><span class="n">name</span><span class="o">]</span><span class="p">.</span><span class="n">toscreen</span><span class="p">()</span>
+<span class="w">        </span><span class="k">else</span><span class="err">:</span>
+<span class="w">            </span><span class="n">qtile</span><span class="p">.</span><span class="n">focus_screen</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">            </span><span class="n">qtile</span><span class="p">.</span><span class="n">groups_map</span><span class="o">[</span><span class="n">name</span><span class="o">]</span><span class="p">.</span><span class="n">toscreen</span><span class="p">()</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">_inner</span>
+
+<span class="n">def</span><span class="w"> </span><span class="n">go_to_group_and_move_window</span><span class="p">(</span><span class="nl">name</span><span class="p">:</span><span class="w"> </span><span class="nf">str</span><span class="p">)</span><span class="err">:</span>
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">_inner</span><span class="p">(</span><span class="n">qtile</span><span class="p">)</span><span class="err">:</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nf">len</span><span class="p">(</span><span class="n">qtile</span><span class="p">.</span><span class="n">screens</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="err">:</span>
+<span class="w">            </span><span class="n">qtile</span><span class="p">.</span><span class="n">current_window</span><span class="p">.</span><span class="n">togroup</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">switch_group</span><span class="o">=</span><span class="k">True</span><span class="p">)</span>
+<span class="w">            </span><span class="k">return</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="ss">&quot;123&quot;</span><span class="err">:</span>
+<span class="w">            </span><span class="n">qtile</span><span class="p">.</span><span class="n">current_window</span><span class="p">.</span><span class="n">togroup</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">switch_group</span><span class="o">=</span><span class="k">False</span><span class="p">)</span>
+<span class="w">            </span><span class="n">qtile</span><span class="p">.</span><span class="n">focus_screen</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">            </span><span class="n">qtile</span><span class="p">.</span><span class="n">groups_map</span><span class="o">[</span><span class="n">name</span><span class="o">]</span><span class="p">.</span><span class="n">toscreen</span><span class="p">()</span>
+<span class="w">        </span><span class="k">else</span><span class="err">:</span>
+<span class="w">            </span><span class="n">qtile</span><span class="p">.</span><span class="n">current_window</span><span class="p">.</span><span class="n">togroup</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">switch_group</span><span class="o">=</span><span class="k">False</span><span class="p">)</span>
+<span class="w">            </span><span class="n">qtile</span><span class="p">.</span><span class="n">focus_screen</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">            </span><span class="n">qtile</span><span class="p">.</span><span class="n">groups_map</span><span class="o">[</span><span class="n">name</span><span class="o">]</span><span class="p">.</span><span class="n">toscreen</span><span class="p">()</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">_inner</span>
+
+<span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nl">groups</span><span class="p">:</span>
+<span class="w">    </span><span class="n">keys</span><span class="p">.</span><span class="n">extend</span><span class="p">(</span>
+<span class="w">        </span><span class="o">[</span>
+<span class="n">            # mod1 + group number = switch to group</span>
+<span class="n">            Key(</span>
+<span class="n">                [mod</span><span class="o">]</span><span class="p">,</span>
+<span class="w">                </span><span class="n">i</span><span class="p">.</span><span class="n">name</span><span class="p">,</span>
+<span class="w">                </span><span class="n">lazy</span><span class="p">.</span><span class="k">function</span><span class="p">(</span><span class="n">go_to_group</span><span class="p">(</span><span class="n">i</span><span class="p">.</span><span class="n">name</span><span class="p">)),</span>
+<span class="w">                </span><span class="k">desc</span><span class="o">=</span><span class="ss">&quot;Switch to group {}&quot;</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">i</span><span class="p">.</span><span class="n">name</span><span class="p">),</span>
+<span class="w">            </span><span class="p">),</span>
+<span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="n">mod1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">shift</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">group</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">switch</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">move</span><span class="w"> </span><span class="n">focused</span><span class="w"> </span><span class="k">window</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="k">group</span>
+<span class="w">            </span><span class="k">Key</span><span class="p">(</span>
+<span class="w">                </span><span class="o">[</span><span class="n">mod, &quot;shift&quot;</span><span class="o">]</span><span class="p">,</span>
+<span class="w">                </span><span class="n">i</span><span class="p">.</span><span class="n">name</span><span class="p">,</span>
+<span class="w">                </span><span class="n">lazy</span><span class="p">.</span><span class="k">function</span><span class="p">(</span><span class="n">go_to_group_and_move_window</span><span class="p">(</span><span class="n">i</span><span class="p">.</span><span class="n">name</span><span class="p">)),</span>
+<span class="w">                </span><span class="k">desc</span><span class="o">=</span><span class="ss">&quot;Switch to &amp; move focused window to group {}&quot;</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">i</span><span class="p">.</span><span class="n">name</span><span class="p">),</span>
+<span class="w">            </span><span class="p">)</span><span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="ow">Or</span><span class="p">,</span><span class="w"> </span><span class="k">use</span><span class="w"> </span><span class="n">below</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">prefer</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">switch</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="k">group</span><span class="p">.</span>
+<span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">mod1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">shift</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">group</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">move</span><span class="w"> </span><span class="n">focused</span><span class="w"> </span><span class="k">window</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="k">group</span>
+<span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="k">Key</span><span class="p">(</span><span class="o">[</span><span class="n">mod, &quot;shift&quot;</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">lazy</span><span class="p">.</span><span class="k">window</span><span class="p">.</span><span class="n">togroup</span><span class="p">(</span><span class="n">i</span><span class="p">.</span><span class="n">name</span><span class="p">),</span>
+<span class="w">            </span><span class="err">#</span><span class="w">     </span><span class="k">desc</span><span class="o">=</span><span class="ss">&quot;move focused window to group {}&quot;</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">i</span><span class="p">.</span><span class="n">name</span><span class="p">)),</span>
+<span class="w">        </span><span class="err">]</span>
+<span class="w">    </span><span class="p">)</span>
+</code></pre></div>
+
+<p>It was quite a satisfying experience to do this configuration. Here is a final pic of how the setup looked like <img alt="Image" src="/images/qtile-wm-setup-vertical-monitor.jpg"></p>
+      </div>
+      <footer class="post-footer">
+        <div class="meta">
+            Written by <a href="/author/khirod.html">khirod</a> in 
+            <a href="/category/technology.html">Technology</a>
+            on <time datetime="2024-05-26T20:49:00+05:30">Sun 26 May 2024</time>
+            Tags:  <a href="/tag/linux.html">linux</a> <a href="/tag/qtile.html">qtile</a>        </div>
+      </footer>
+       </article> <!-- /#page-main -->
+       </div>
+
+      </div>  <!-- /#page-body -->
+
+      <footer id="page-foot">
+        <p> Powered by <a href="http://pelican.readthedocs.org">Pelican</a></p>
+      </footer>
+    </div> <!-- /#page -->
+
+  </body>
+</html>
