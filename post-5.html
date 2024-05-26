@@ -142,7 +142,64 @@ xrandr<span class="w"> </span>--output<span class="w"> </span>eDP-1<span class="
 <span class="p">),</span>
 </code></pre></div>
 
-<p>Notice now we have 2 screens in config, and the second screen also takes a wallpaper parameter to automatically use a vertical monitor when it is connected and set the wallpaper.</p>
+<p>Notice now we have 2 screens in config, and the second screen also takes a wallpaper parameter to automatically use a vertical monitor when it is connected and set the wallpaper.  </p>
+<p>The real magic of switching however happens with below keybindings I use for Qtile, they check for available screens and if the length of screens list is greater than 1, then switching works</p>
+<div class="highlight"><pre><span></span><code><span class="n">def</span><span class="w"> </span><span class="n">go_to_group</span><span class="p">(</span><span class="nl">name</span><span class="p">:</span><span class="w"> </span><span class="nf">str</span><span class="p">)</span><span class="err">:</span>
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">_inner</span><span class="p">(</span><span class="n">qtile</span><span class="p">)</span><span class="err">:</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nf">len</span><span class="p">(</span><span class="n">qtile</span><span class="p">.</span><span class="n">screens</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="err">:</span>
+<span class="w">            </span><span class="n">qtile</span><span class="p">.</span><span class="n">groups_map</span><span class="o">[</span><span class="n">name</span><span class="o">]</span><span class="p">.</span><span class="n">toscreen</span><span class="p">()</span>
+<span class="w">            </span><span class="k">return</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="s1">&#39;123&#39;</span><span class="err">:</span>
+<span class="w">            </span><span class="n">qtile</span><span class="p">.</span><span class="n">focus_screen</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">            </span><span class="n">qtile</span><span class="p">.</span><span class="n">groups_map</span><span class="o">[</span><span class="n">name</span><span class="o">]</span><span class="p">.</span><span class="n">toscreen</span><span class="p">()</span>
+<span class="w">        </span><span class="k">else</span><span class="err">:</span>
+<span class="w">            </span><span class="n">qtile</span><span class="p">.</span><span class="n">focus_screen</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">            </span><span class="n">qtile</span><span class="p">.</span><span class="n">groups_map</span><span class="o">[</span><span class="n">name</span><span class="o">]</span><span class="p">.</span><span class="n">toscreen</span><span class="p">()</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">_inner</span>
+
+<span class="n">def</span><span class="w"> </span><span class="n">go_to_group_and_move_window</span><span class="p">(</span><span class="nl">name</span><span class="p">:</span><span class="w"> </span><span class="nf">str</span><span class="p">)</span><span class="err">:</span>
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">_inner</span><span class="p">(</span><span class="n">qtile</span><span class="p">)</span><span class="err">:</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nf">len</span><span class="p">(</span><span class="n">qtile</span><span class="p">.</span><span class="n">screens</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="err">:</span>
+<span class="w">            </span><span class="n">qtile</span><span class="p">.</span><span class="n">current_window</span><span class="p">.</span><span class="n">togroup</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">switch_group</span><span class="o">=</span><span class="k">True</span><span class="p">)</span>
+<span class="w">            </span><span class="k">return</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="ss">&quot;123&quot;</span><span class="err">:</span>
+<span class="w">            </span><span class="n">qtile</span><span class="p">.</span><span class="n">current_window</span><span class="p">.</span><span class="n">togroup</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">switch_group</span><span class="o">=</span><span class="k">False</span><span class="p">)</span>
+<span class="w">            </span><span class="n">qtile</span><span class="p">.</span><span class="n">focus_screen</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">            </span><span class="n">qtile</span><span class="p">.</span><span class="n">groups_map</span><span class="o">[</span><span class="n">name</span><span class="o">]</span><span class="p">.</span><span class="n">toscreen</span><span class="p">()</span>
+<span class="w">        </span><span class="k">else</span><span class="err">:</span>
+<span class="w">            </span><span class="n">qtile</span><span class="p">.</span><span class="n">current_window</span><span class="p">.</span><span class="n">togroup</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">switch_group</span><span class="o">=</span><span class="k">False</span><span class="p">)</span>
+<span class="w">            </span><span class="n">qtile</span><span class="p">.</span><span class="n">focus_screen</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">            </span><span class="n">qtile</span><span class="p">.</span><span class="n">groups_map</span><span class="o">[</span><span class="n">name</span><span class="o">]</span><span class="p">.</span><span class="n">toscreen</span><span class="p">()</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">_inner</span>
+
+<span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nl">groups</span><span class="p">:</span>
+<span class="w">    </span><span class="n">keys</span><span class="p">.</span><span class="n">extend</span><span class="p">(</span>
+<span class="w">        </span><span class="o">[</span>
+<span class="n">            # mod1 + group number = switch to group</span>
+<span class="n">            Key(</span>
+<span class="n">                [mod</span><span class="o">]</span><span class="p">,</span>
+<span class="w">                </span><span class="n">i</span><span class="p">.</span><span class="n">name</span><span class="p">,</span>
+<span class="w">                </span><span class="n">lazy</span><span class="p">.</span><span class="k">function</span><span class="p">(</span><span class="n">go_to_group</span><span class="p">(</span><span class="n">i</span><span class="p">.</span><span class="n">name</span><span class="p">)),</span>
+<span class="w">                </span><span class="k">desc</span><span class="o">=</span><span class="ss">&quot;Switch to group {}&quot;</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">i</span><span class="p">.</span><span class="n">name</span><span class="p">),</span>
+<span class="w">            </span><span class="p">),</span>
+<span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="n">mod1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">shift</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">group</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">switch</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">move</span><span class="w"> </span><span class="n">focused</span><span class="w"> </span><span class="k">window</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="k">group</span>
+<span class="w">            </span><span class="k">Key</span><span class="p">(</span>
+<span class="w">                </span><span class="o">[</span><span class="n">mod, &quot;shift&quot;</span><span class="o">]</span><span class="p">,</span>
+<span class="w">                </span><span class="n">i</span><span class="p">.</span><span class="n">name</span><span class="p">,</span>
+<span class="w">                </span><span class="n">lazy</span><span class="p">.</span><span class="k">function</span><span class="p">(</span><span class="n">go_to_group_and_move_window</span><span class="p">(</span><span class="n">i</span><span class="p">.</span><span class="n">name</span><span class="p">)),</span>
+<span class="w">                </span><span class="k">desc</span><span class="o">=</span><span class="ss">&quot;Switch to &amp; move focused window to group {}&quot;</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">i</span><span class="p">.</span><span class="n">name</span><span class="p">),</span>
+<span class="w">            </span><span class="p">)</span><span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="ow">Or</span><span class="p">,</span><span class="w"> </span><span class="k">use</span><span class="w"> </span><span class="n">below</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">prefer</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">switch</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="k">group</span><span class="p">.</span>
+<span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">mod1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">shift</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">group</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">move</span><span class="w"> </span><span class="n">focused</span><span class="w"> </span><span class="k">window</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="k">group</span>
+<span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="k">Key</span><span class="p">(</span><span class="o">[</span><span class="n">mod, &quot;shift&quot;</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">lazy</span><span class="p">.</span><span class="k">window</span><span class="p">.</span><span class="n">togroup</span><span class="p">(</span><span class="n">i</span><span class="p">.</span><span class="n">name</span><span class="p">),</span>
+<span class="w">            </span><span class="err">#</span><span class="w">     </span><span class="k">desc</span><span class="o">=</span><span class="ss">&quot;move focused window to group {}&quot;</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">i</span><span class="p">.</span><span class="n">name</span><span class="p">)),</span>
+<span class="w">        </span><span class="err">]</span>
+<span class="w">    </span><span class="p">)</span>
+</code></pre></div>
+
 <p>It was quite a satisfying experience to do this configuration. Here is a final pic of how the setup looked like <img alt="Image" src="/images/qtile-wm-setup-vertical-monitor.jpg"></p>
       </div>
       <footer class="post-footer">
