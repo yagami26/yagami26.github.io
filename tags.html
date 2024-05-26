@@ -1,99 +1,160 @@
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="initial-scale=1.0, width=device-width, user-scalable=no" />
-    <title>code((chords) -> cardio)::io — Tags</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <!--[if lte IE 8]><script type="text/javascript" src="/theme/js/html5shiv.js"></script><![endif]-->
-    <link rel="stylesheet" type="text/css" href="/theme/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="/theme/css/theme.css" />
-    <link rel="shortcut icon" type="image/png" href="/favicon.png" />
-    <!--[if lte IE 8]><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" /><![endif]-->
-    <link rel="alternate" type="application/atom+xml"
-                           title="code((chords) -> cardio)::io — Flux Atom"
-                           href="/" /> 
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
 
-    <script type="text/javascript" src="/theme/js/microTags.js"></script>
-    <script>
-      function tag_cloud_init() {
-        var ul = document.getElementById("tag-cloud");
-        window.tagCloud = new microTags(ul, {
-          'min-size': .95,
-          'max-size': 3.5,
-          'min-angle': -8,
-          'max-angle': 8
-        });
-      }
-      if (window.addEventListener) window.addEventListener("load", tag_cloud_init, false);
-      else if (window.attachEvent) window.attachEvent("onload", tag_cloud_init);
-      else window.onload = tag_cloud_init;
-    </script>
-  </head>
-  <body>
-    <div class="container" id="page">
-      <header id="page-head">
-        <h1>
-          <a href="/index.html">code((chords) -> cardio)::io</a>
-        </h1>
-      </header>
-      
-      <div class="row" id="page-body">
-        <aside class="col-md-2" id="page-side">
-          <!-- begin includes/sidebar.html -->
-          <nav>
-            <h3>Pages</h3>
-            <ul>
-              <li><a href="/archives.html">Archive</a></li>
-              <li><a href="/tags.html">Tags</a></li>
-              <li><a href="/pages/about.html">About</a></li>
-            </ul>
-          </nav>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
 
-          <nav>
-            <h3>Categories</h3>
-            <ul>
-              <li><a href="/category/technology.html">Technology</a></li>
-            </ul>
-          </nav>
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
 
-          <nav>
-            <h3>Social</h3>
-            <ul>
-              <li><a href="https://linkedin.com/in/khirodkantnaik">Linkedin</a></li>
-              <li><a href="https://youtube.com/@placeholder2128">Youtube</a></li>
-            </ul>
-          </nav>
 
-          <nav>
-            <h3>Blogroll</h3>
-            <ul>
-              <li><a href="https://getpelican.com/">Pelican</a></li>
-            </ul>
-          </nav>
-          <!-- end includes/sidebar.html --></aside> <!-- /#page-side -->
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="/theme/pygments/github.min.css">
 
-       <div class="col-md-8 col-md-ofset-2">
-       <section id="page-main" role="main">
-      <h1>Tags</h1>
-      <ul id="tag-cloud">
-      <li data-count="2" title="2 article(s)"><a href="/tag/linux.html">linux</a></li>
-      <li data-count="1" title="1 article(s)"><a href="/tag/qtile.html">qtile</a></li>
-      <li data-count="1" title="1 article(s)"><a href="/tag/neovim.html">neovim</a></li>
-      <li data-count="1" title="1 article(s)"><a href="/tag/vim.html">vim</a></li>
-      <li data-count="3" title="3 article(s)"><a href="/tag/golang.html">golang</a></li>
-      <li data-count="1" title="1 article(s)"><a href="/tag/leetcode.html">leetcode</a></li>
-      <li data-count="2" title="2 article(s)"><a href="/tag/syntax.html">syntax</a></li>
+
+
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/solid.css">
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+    <meta name="author" content="khirod" />
+    <meta name="description" content="Khirod Thoughts and Writings" />
+  <meta property="og:site_name" content="Khirod Blog"/>
+  <meta property="og:type" content="blog"/>
+  <meta property="og:title" content="Khirod Blog"/>
+  <meta property="og:description" content="Khirod Thoughts and Writings"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:url" content=""/>
+
+  <title>Khirod Blog &ndash; Tags</title>
+
+
+</head>
+<body class="light-theme">
+
+<aside>
+  <div>
+    <a href="/">
+      <img src="/theme/img/profile.png" alt="Blog" title="Blog">
+    </a>
+
+    <h1>
+      <a href="/">Blog</a>
+    </h1>
+
+    <p>$ code && chords && chess</p>
+
+
+    <nav>
+      <ul class="list">
+
+
+            <li>
+              <a target="_self"
+                 href="/pages/about.html#about">
+                About
+              </a>
+            </li>
+
+          <li>
+            <a target="_self" href="https://getpelican.com/" >Pelican</a>
+          </li>
       </ul>
-       </section> <!-- /#page-main -->
-       </div>
+    </nav>
 
-      </div>  <!-- /#page-body -->
+    <ul class="social">
+      <li>
+        <a class="sc-Linkedin"
+           href="https://linkedin.com/in/khirodkantnaik"
+           target="_blank">
+          <i class="fa-brands fa-Linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-Youtube"
+           href="https://youtube.com/@placeholder2128"
+           target="_blank">
+          <i class="fa-brands fa-Youtube"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
 
-      <footer id="page-foot">
-        <p> Powered by <a href="http://pelican.readthedocs.org">Pelican</a></p>
-      </footer>
-    </div> <!-- /#page -->
+</aside>
+  <main>
 
-  </body>
+<nav>
+  <a href="/">Home</a>
+
+  <a href="/archives.html">Archives</a>
+  <a href="/categories.html">Categories</a>
+  <a href="/tags.html">Tags</a>
+
+
+</nav>
+
+<article class="single">
+  <header>
+    <h1 id="tags">Tags</h1>
+  </header>
+  <div>
+    <ul class="list">          <li><a href="/tag/golang.html">golang</a> (3)</li>
+          <li><a href="/tag/leetcode.html">leetcode</a> (1)</li>
+          <li><a href="/tag/linux.html">linux</a> (2)</li>
+          <li><a href="/tag/neovim.html">neovim</a> (1)</li>
+          <li><a href="/tag/qtile.html">qtile</a> (1)</li>
+          <li><a href="/tag/syntax.html">syntax</a> (2)</li>
+          <li><a href="/tag/vim.html">vim</a> (1)</li>
+    </ul>
+  </div>
+</article>
+
+<footer>
+<p>
+  &copy; 2024  - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/deed.en_US" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p></footer>  </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Khirod Blog ",
+  "url" : "",
+  "image": "",
+  "description": "Khirod Thoughts and Writings"
+}
+</script>
+</body>
 </html>

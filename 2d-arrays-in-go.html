@@ -1,84 +1,139 @@
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-        <meta charset="utf-8" />
-    <meta name="viewport" content="initial-scale=1.0, width=device-width, user-scalable=no" />
-    <title>Creating 2-D arrays in golang — code((chords) -> cardio)::io</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <!--[if lte IE 8]><script type="text/javascript" src="/theme/js/html5shiv.js"></script><![endif]-->
-    <link rel="stylesheet" type="text/css" href="/theme/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="/theme/css/theme.css" />
-    <link rel="shortcut icon" type="image/png" href="/favicon.png" />
-    <!--[if lte IE 8]><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" /><![endif]-->
-    <link rel="alternate" type="application/atom+xml"
-                           title="code((chords) -> cardio)::io — Flux Atom"
-                           href="/" /> 
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
 
-    <meta name="author"   content="khirod" />
-    <meta name="keywords" content="golang, syntax" />
-    <link rel="stylesheet" media="not print" type="text/css" href="/theme/css/pygments.css" /> 
-  </head>
-  <body>
-    <div class="container" id="page">
-      <header id="page-head">
-        <h1>
-          <a href="/index.html">code((chords) -> cardio)::io</a>
-        </h1>
-      </header>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="/theme/pygments/github.min.css">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/solid.css">
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+<meta name="author" content="khirod" />
+<meta name="description" content="how to create 2-D arrays in golang" />
+<meta name="keywords" content="golang, syntax">
+
+
+  <meta property="og:site_name" content="Khirod Blog"/>
+  <meta property="og:title" content="Creating 2-D arrays in golang"/>
+  <meta property="og:description" content="how to create 2-D arrays in golang"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:url" content="/2d-arrays-in-go.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2024-05-21 21:18:00+05:30"/>
+  <meta property="article:modified_time" content=""/>
+  <meta property="article:author" content="/author/khirod.html">
+  <meta property="article:section" content="Technology"/>
+  <meta property="article:tag" content="golang"/>
+  <meta property="article:tag" content="syntax"/>
+  <meta property="og:image" content="">
+
+  <title>Khirod Blog &ndash; Creating 2-D arrays in golang</title>
+
+
+</head>
+<body class="light-theme">
+
+<aside>
+  <div>
+    <a href="/">
+      <img src="/theme/img/profile.png" alt="Blog" title="Blog">
+    </a>
+
+    <h1>
+      <a href="/">Blog</a>
+    </h1>
+
+    <p>$ code && chords && chess</p>
+
+
+    <nav>
+      <ul class="list">
+
+
+            <li>
+              <a target="_self"
+                 href="/pages/about.html#about">
+                About
+              </a>
+            </li>
+
+          <li>
+            <a target="_self" href="https://getpelican.com/" >Pelican</a>
+          </li>
+      </ul>
+    </nav>
+
+    <ul class="social">
+      <li>
+        <a class="sc-Linkedin"
+           href="https://linkedin.com/in/khirodkantnaik"
+           target="_blank">
+          <i class="fa-brands fa-Linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-Youtube"
+           href="https://youtube.com/@placeholder2128"
+           target="_blank">
+          <i class="fa-brands fa-Youtube"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</aside>
+  <main>
+
+<nav>
+  <a href="/">Home</a>
+
+  <a href="/archives.html">Archives</a>
+  <a href="/categories.html">Categories</a>
+  <a href="/tags.html">Tags</a>
+
+
+</nav>
+
+<article class="single">
+  <header>
       
-      <div class="row" id="page-body">
-        <aside class="col-md-2" id="page-side">
-          <!-- begin includes/sidebar.html -->
-          <nav>
-            <h3>Pages</h3>
-            <ul>
-              <li><a href="/archives.html">Archive</a></li>
-              <li><a href="/tags.html">Tags</a></li>
-              <li><a href="/pages/about.html">About</a></li>
-            </ul>
-          </nav>
+    <h1 id="2d-arrays-in-go">Creating 2-D arrays in golang</h1>
+    <p>
+      Posted on Tue 21 May 2024 in <a href="/category/technology.html">Technology</a>
 
-          <nav>
-            <h3>Categories</h3>
-            <ul>
-              <li class="active"><a href="/category/technology.html">Technology</a></li>
-            </ul>
-          </nav>
+    </p>
+  </header>
 
-          <nav>
-            <h3>Social</h3>
-            <ul>
-              <li><a href="https://linkedin.com/in/khirodkantnaik">Linkedin</a></li>
-              <li><a href="https://youtube.com/@placeholder2128">Youtube</a></li>
-            </ul>
-          </nav>
 
-          <nav>
-            <h3>Blogroll</h3>
-            <ul>
-              <li><a href="https://getpelican.com/">Pelican</a></li>
-            </ul>
-          </nav>
-          <!-- end includes/sidebar.html --></aside> <!-- /#page-side -->
-
-       <div class="col-md-8 col-md-ofset-2">
-       <article class="post" id="page-main" role="main">
-      <header class="post-header">
-        <h1>
-          <a rel="bookmark"
-             href="/2d-arrays-in-go.html"
-             title="Permanent Version Creating 2-D arrays in golang">
-             Creating 2-D arrays in golang
-          </a>
-        </h1>
-        <div class="meta">
-<!-- includes/article_meta.html -->
-            <time datetime="2024-05-21T21:18:00+05:30">Tue 21 May 2024</time>
-            <a href="/category/technology.html">Technology</a>
-            by <a href="/author/khirod.html">khirod</a>              <br />Tags:              <a rel="tag" href="/tag/golang.html">golang</a>,               <a rel="tag" href="/tag/syntax.html">syntax</a>        </div>
-      </header>
-      <div class="post-content"> 
-        <p>I was doing leetcode problems because being prepared doesn't harm anyone, haha, and I'm also trying to learn golang in parallel. Going through the basic syntax currently and a lot of time scenarios arise where you have to initialise a 2-D array eg- graphs, or for dynamic programming problems. Here we use built-in <code>make</code> function to create a slice in golang. So this implementation is a slice of slices. I read there is other way of creating 2D arrays as well but I'll explore that later as this seems simpler to me.  </p>
+  <div>
+    <p>I was doing leetcode problems because being prepared doesn't harm anyone, haha, and I'm also trying to learn golang in parallel. Going through the basic syntax currently and a lot of time scenarios arise where you have to initialise a 2-D array eg- graphs, or for dynamic programming problems. Here we use built-in <code>make</code> function to create a slice in golang. So this implementation is a slice of slices. I read there is other way of creating 2D arrays as well but I'll explore that later as this seems simpler to me.  </p>
 <div class="highlight"><pre><span></span><code><span class="n">package</span><span class="w"> </span><span class="n">main</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="s2">&quot;fmt&quot;</span>
@@ -103,23 +158,49 @@
 
 <span class="p">}</span>
 </code></pre></div>
-      </div>
-      <footer class="post-footer">
-        <div class="meta">
-            Written by <a href="/author/khirod.html">khirod</a> in 
-            <a href="/category/technology.html">Technology</a>
-            on <time datetime="2024-05-21T21:18:00+05:30">Tue 21 May 2024</time>
-            Tags:  <a href="/tag/golang.html">golang</a> <a href="/tag/syntax.html">syntax</a>        </div>
-      </footer>
-       </article> <!-- /#page-main -->
-       </div>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="/tag/golang.html">golang</a>
+      <a href="/tag/syntax.html">syntax</a>
+    </p>
+  </div>
 
-      </div>  <!-- /#page-body -->
 
-      <footer id="page-foot">
-        <p> Powered by <a href="http://pelican.readthedocs.org">Pelican</a></p>
-      </footer>
-    </div> <!-- /#page -->
 
-  </body>
+
+
+
+</article>
+
+<footer>
+<p>
+  &copy; 2024  - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/deed.en_US" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p></footer>  </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Khirod Blog ",
+  "url" : "",
+  "image": "",
+  "description": "Khirod Thoughts and Writings"
+}
+</script>
+</body>
 </html>
