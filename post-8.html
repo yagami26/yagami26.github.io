@@ -1,0 +1,213 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://yagami26.github.io/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="https://yagami26.github.io/theme/pygments/github.min.css">
+
+
+
+  <link rel="stylesheet" type="text/css" href="https://yagami26.github.io/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://yagami26.github.io/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://yagami26.github.io/theme/font-awesome/css/solid.css">
+
+
+  <link rel="shortcut icon" href="https://yagami26.github.io/images/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="https://yagami26.github.io/images/favicon.ico" type="image/x-icon">
+
+
+  <link href="https://yagami26.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Khirod Blog Atom">
+
+
+
+
+
+
+
+
+ 
+
+<meta name="author" content="khirod" />
+<meta name="description" content="I decided to setup LSP in neovim for Golang development. I had known about LSP&#39;s for a while and I think it is a step in the right direction. With abundance of text editors, it is essential that we give users the opportunity to setup their development environment. I have …" />
+<meta name="keywords" content="neovim, lsp, golang">
+
+
+  <meta property="og:site_name" content="Khirod Blog"/>
+  <meta property="og:title" content="Golang with LSP setup in neovim"/>
+  <meta property="og:description" content="I decided to setup LSP in neovim for Golang development. I had known about LSP&#39;s for a while and I think it is a step in the right direction. With abundance of text editors, it is essential that we give users the opportunity to setup their development environment. I have …"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:url" content="https://yagami26.github.io/post-8.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2024-06-09 02:14:00+05:30"/>
+  <meta property="article:modified_time" content=""/>
+  <meta property="article:author" content="https://yagami26.github.io/author/khirod.html">
+  <meta property="article:section" content="Technology"/>
+  <meta property="article:tag" content="neovim"/>
+  <meta property="article:tag" content="lsp"/>
+  <meta property="article:tag" content="golang"/>
+  <meta property="og:image" content="https://yagami26.github.io/images/straw-hat.jpg">
+
+  <title>Khirod Blog &ndash; Golang with LSP setup in neovim</title>
+
+
+</head>
+<body class="light-theme">
+
+<aside>
+  <div>
+    <a href="https://yagami26.github.io/">
+      <img src="https://yagami26.github.io/images/straw-hat.jpg" alt="$ "khi" -tech" title="$ "khi" -tech">
+    </a>
+
+    <h1>
+      <a href="https://yagami26.github.io/">$ "khi" -tech</a>
+    </h1>
+
+    <p>writing about tech and randomness in universe</p>
+
+
+    <nav>
+      <ul class="list">
+
+
+            <li>
+              <a target="_self"
+                 href="https://yagami26.github.io/pages/about.html#about">
+                About
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://yagami26.github.io/pages/chess.html#chess">
+                Chess
+              </a>
+            </li>
+
+      </ul>
+    </nav>
+
+    <ul class="social">
+      <li>
+        <a class="sc-youtube"
+           href="https://youtube.com/@placeholder2128"
+           target="_blank">
+          <i class="fa-brands fa-youtube"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-linkedin"
+           href="https://www.linkedin.com/in/khirodkantnaik/"
+           target="_blank">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-github"
+           href="https://github.com/yagami26"
+           target="_blank">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-reddit"
+           href="https://www.reddit.com/user/Mr_Obi-Wan"
+           target="_blank">
+          <i class="fa-brands fa-reddit"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-rss"
+           href="/feeds/all.atom.xml"
+           target="_blank">
+          <i class="fa-solid fa-rss"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</aside>
+  <main>
+
+<nav>
+  <a href="https://yagami26.github.io/">Home</a>
+
+  <a href="/categories.html">Categories</a>
+  <a href="/tags.html">Tags</a>
+
+  <a href="https://yagami26.github.io/feeds/all.atom.xml">Atom</a>
+
+</nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="post-8">Golang with LSP setup in neovim</h1>
+    <p>
+      Posted on Sun 09 June 2024 in <a href="https://yagami26.github.io/category/technology.html">Technology</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>I decided to setup LSP in neovim for Golang development. I had known about LSP's for a while and I think it is a step in the right direction. With abundance of text editors, it is essential that we give users the opportunity to setup their development environment. I have never been a fan of IDE's. The only IDE I recommend is IntelliJIdea if you're doing Java development. I still feel most of the IDEs are super bloated and force the users to do things a certain way. I prefer having a fast and efficient development environment and I'm trying to create a development environment using vim. I agree you have similar capability in IDE's in form of plugins but somehow IDE's have always felt slow and use a lot of resources.  </p>
+<p>LSP is basically a language server, your editor becomes a client and you can interact with your server to execute commands and do things like code-completion, code search, reference search etc. In vim, you can create keybindings to invoke specific LSP actions. I am currently using neovim with lazy kickstart plugin to manage packages. It already came with Mason installed and all I had to do was install <code>gopls</code> language server for golang. The LSP server already starts itself and attaches itself to current buffer if you're editing a go file.  </p>
+<p>Currently I'm happy with the results and will tweak my environment more in some time. Here is a gif to see what I'm talking about completely managed from vim and <em>NO MOUSE</em>  <img alt="lsp-gif" src="https://yagami26.github.io/images/lsp-go.gif"></p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://yagami26.github.io/tag/neovim.html">neovim</a>
+      <a href="https://yagami26.github.io/tag/lsp.html">lsp</a>
+      <a href="https://yagami26.github.io/tag/golang.html">golang</a>
+    </p>
+  </div>
+
+
+
+
+
+
+</article>
+
+<footer>
+<p>
+  &copy; 2024  - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/deed.en_US" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p></footer>  </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Khirod Blog ",
+  "url" : "https://yagami26.github.io",
+  "image": "https://yagami26.github.io/images/straw-hat.jpg",
+  "description": "Khirod Thoughts and Writings"
+}
+</script>
+</body>
+</html>
