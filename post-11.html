@@ -1,0 +1,245 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://yagami26.github.io/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="https://yagami26.github.io/theme/pygments/github.min.css">
+
+
+
+  <link rel="stylesheet" type="text/css" href="https://yagami26.github.io/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://yagami26.github.io/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://yagami26.github.io/theme/font-awesome/css/solid.css">
+
+
+  <link rel="shortcut icon" href="https://yagami26.github.io/images/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="https://yagami26.github.io/images/favicon.ico" type="image/x-icon">
+
+
+  <link href="https://yagami26.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Khirod Blog Atom">
+
+
+
+
+
+
+
+
+ 
+
+<meta name="author" content="khirod" />
+<meta name="description" content="The problem - Unique Binary Search Trees Intuition Having practiced a lot of dynamic programming problems in the past, I knew this can be solved with dynamic programming however I didn&#39;t get the intuition immediately for this. The intuition is pretty simple actually All the elements on left of BST are …" />
+<meta name="keywords" content="leetcode, dynamic-programming, binary-search-tree">
+
+
+  <meta property="og:site_name" content="Khirod Blog"/>
+  <meta property="og:title" content="Unique binary search trees [LeetCode Medium]"/>
+  <meta property="og:description" content="The problem - Unique Binary Search Trees Intuition Having practiced a lot of dynamic programming problems in the past, I knew this can be solved with dynamic programming however I didn&#39;t get the intuition immediately for this. The intuition is pretty simple actually All the elements on left of BST are …"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:url" content="https://yagami26.github.io/post-11.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2024-06-17 23:46:00+05:30"/>
+  <meta property="article:modified_time" content=""/>
+  <meta property="article:author" content="https://yagami26.github.io/author/khirod.html">
+  <meta property="article:section" content="Algorithms"/>
+  <meta property="article:tag" content="leetcode"/>
+  <meta property="article:tag" content="dynamic-programming"/>
+  <meta property="article:tag" content="binary-search-tree"/>
+  <meta property="og:image" content="https://yagami26.github.io/images/straw-hat.jpg">
+
+  <title>Khirod Blog &ndash; Unique binary search trees [LeetCode Medium]</title>
+
+
+</head>
+<body class="light-theme">
+
+<aside>
+  <div>
+    <a href="https://yagami26.github.io/">
+      <img src="https://yagami26.github.io/images/straw-hat.jpg" alt="$ "khi" -tech" title="$ "khi" -tech">
+    </a>
+
+    <h1>
+      <a href="https://yagami26.github.io/">$ "khi" -tech</a>
+    </h1>
+
+    <p>writing about tech and randomness in universe</p>
+
+
+    <nav>
+      <ul class="list">
+
+
+            <li>
+              <a target="_self"
+                 href="https://yagami26.github.io/pages/about.html#about">
+                About
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://yagami26.github.io/pages/chess.html#chess">
+                Chess
+              </a>
+            </li>
+
+      </ul>
+    </nav>
+
+    <ul class="social">
+      <li>
+        <a class="sc-youtube"
+           href="https://youtube.com/@placeholder2128"
+           target="_blank">
+          <i class="fa-brands fa-youtube"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-linkedin"
+           href="https://www.linkedin.com/in/khirodkantnaik/"
+           target="_blank">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-github"
+           href="https://github.com/yagami26"
+           target="_blank">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-reddit"
+           href="https://www.reddit.com/user/Mr_Obi-Wan"
+           target="_blank">
+          <i class="fa-brands fa-reddit"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-rss"
+           href="/feeds/all.atom.xml"
+           target="_blank">
+          <i class="fa-solid fa-rss"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</aside>
+  <main>
+
+<nav>
+  <a href="https://yagami26.github.io/">Home</a>
+
+  <a href="/categories.html">Categories</a>
+  <a href="/tags.html">Tags</a>
+
+  <a href="https://yagami26.github.io/feeds/all.atom.xml">Atom</a>
+
+</nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="post-11">Unique binary search trees [LeetCode Medium]</h1>
+    <p>
+      Posted on Mon 17 June 2024 in <a href="https://yagami26.github.io/category/algorithms.html">Algorithms</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>The problem - <a href="https://leetcode.com/problems/unique-binary-search-trees/description/">Unique Binary Search Trees</a>  </p>
+<h2>Intuition</h2>
+<p>Having practiced a lot of dynamic programming problems in the past, I knew this can be solved with dynamic programming however I didn't get the intuition immediately for this. The intuition is pretty simple actually  </p>
+<blockquote>
+<p>All the elements on left of BST are always smaller than root, while on the elements on right are always greater (also note as nos are unique from 1.. N</p>
+</blockquote>
+<p>Well I stated the obvious. <em>Duh</em>! Whenever we attempt a dynamic programming problem, we need to see 2 things recursive definition and overlapping subproblems. Let's start with observations.  </p>
+<ul>
+<li>Choose any root element x where x is in <em>1..N</em></li>
+<li>By definition we know that fixing x on root, the numbers from <em>1..x-1</em> will lie on left, and nos from <em>x+1 .. N</em> will lie on right. </li>
+<li>Now remember that <em>1..x-1</em> as well as <em>x+1..N</em> are consecutive. </li>
+<li>If we already know the number of ways of to arrange k consecutive numbers in form of a valid binary search tree, we have already solved the problem.</li>
+</ul>
+<h3>Algorithm</h3>
+<p>Let's define <code>dp[i]</code> as number of ways to construct valid BSTs using i numbers. 
+<code>dp[0] = 1</code> because we know there is only way to create an empty subtree. Similarly we know <code>dp[1] = 1</code><br>
+Take <code>dp[2]</code> as an example. If we fix 1 as root, then we already know that to create a valid BST of 0 nodes on left there are 1 ways, while to create a valid BST of 1 node on right there is 1 way. Similarly if we fix 2 as root, we know that on left there is 1 way to create a valid BST with one element and 1 way to create a valid BST with 0 elements on the right.  </p>
+<p>The function we get is like this</p>
+<div class="highlight"><pre><span></span><code><span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">dp</span><span class="o">[</span><span class="n">k-1</span><span class="o">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dp</span><span class="o">[</span><span class="n">i-k</span><span class="o">]</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mf">1.</span><span class="p">.</span><span class="n">i</span><span class="p">),</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">we</span><span class="w"> </span><span class="n">incrementally</span><span class="w"> </span><span class="n">fix</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">root</span><span class="w"> </span><span class="k">element</span>
+</code></pre></div>
+
+<p>The implementation like all the dp problems has very less code  </p>
+<div class="highlight"><pre><span></span><code><span class="k">func</span><span class="w"> </span><span class="n">numTrees</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">)</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">dp</span><span class="w"> </span><span class="p">[]</span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">make</span><span class="p">([]</span><span class="nb nb-Type">int</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"> </span><span class="n">r</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">dp</span><span class="p">[</span><span class="n">r</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">r</span><span class="p">]</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">dp</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://yagami26.github.io/tag/leetcode.html">leetcode</a>
+      <a href="https://yagami26.github.io/tag/dynamic-programming.html">dynamic-programming</a>
+      <a href="https://yagami26.github.io/tag/binary-search-tree.html">binary-search-tree</a>
+    </p>
+  </div>
+
+
+
+
+
+
+</article>
+
+<footer>
+<p>
+  &copy; 2024  - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/deed.en_US" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p></footer>  </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Khirod Blog ",
+  "url" : "https://yagami26.github.io",
+  "image": "https://yagami26.github.io/images/straw-hat.jpg",
+  "description": "Khirod Thoughts and Writings"
+}
+</script>
+</body>
+</html>
