@@ -1,43 +1,166 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-          <title>Khirod Blog - Implemented binary search trees in golang today</title>
-        <meta charset="utf-8" />
-        <meta name="generator" content="Pelican" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="writing about tech and randomness in universe" />
-        <link href="https://yagami26.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Khirod Blog Full Atom Feed" />
-        <link href="https://yagami26.github.io/feeds/technology.atom.xml" type="application/atom+xml" rel="alternate" title="Khirod Blog Categories Atom Feed" />
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://yagami26.github.io/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="https://yagami26.github.io/theme/pygments/github.min.css">
+
+
+
+  <link rel="stylesheet" type="text/css" href="https://yagami26.github.io/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://yagami26.github.io/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://yagami26.github.io/theme/font-awesome/css/solid.css">
+
+
+  <link rel="shortcut icon" href="https://yagami26.github.io/images/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="https://yagami26.github.io/images/favicon.ico" type="image/x-icon">
+
+
+  <link href="https://yagami26.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Khirod Blog Atom">
 
 
 
 
-    <meta name="tags" content="golang" />
-    <meta name="tags" content="dsa" />
+
+
+
+
+ 
+
+<meta name="author" content="khirod" />
+<meta name="description" content="I&#39;ve been skipping writing because I was rather drunk on weekends. Today I decided to implement binary search trees in golang, because I always struggle with binary search tree style questions during interviews (another nemesis of mine are arrays with greedy solutions). It&#39;s high time I start working on taking …" />
+<meta name="keywords" content="golang, dsa">
+
+
+  <meta property="og:site_name" content="Khirod Blog"/>
+  <meta property="og:title" content="Implemented binary search trees in golang today"/>
+  <meta property="og:description" content="I&#39;ve been skipping writing because I was rather drunk on weekends. Today I decided to implement binary search trees in golang, because I always struggle with binary search tree style questions during interviews (another nemesis of mine are arrays with greedy solutions). It&#39;s high time I start working on taking …"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:url" content="https://yagami26.github.io/post-6.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2024-06-03 21:32:00+05:30"/>
+  <meta property="article:modified_time" content=""/>
+  <meta property="article:author" content="https://yagami26.github.io/author/khirod.html">
+  <meta property="article:section" content="Technology"/>
+  <meta property="article:tag" content="golang"/>
+  <meta property="article:tag" content="dsa"/>
+  <meta property="og:image" content="https://yagami26.github.io/images/straw-hat.jpg">
+
+  <title>Khirod Blog &ndash; Implemented binary search trees in golang today</title>
+
 
 </head>
+<body class="light-theme">
 
-<body>
-        <header>
-              <hgroup><h1><a href="https://yagami26.github.io/">Khirod Blog</a></h1><p>writing about tech and randomness in universe</p></hgroup>
-        <nav><ul>
-            <li><a href="/categories.html">Categories</a></li>
-            <li><a href="/tags.html">Tags</a></li>
-            <li><a href="https://yagami26.github.io/pages/about.html" >About</a></li>
-            <li><a href="https://yagami26.github.io/pages/chess.html" >Chess</a></li>
-            <li><a href="https://yagami26.github.io/category/algorithms.html" >Algorithms</a></li>
-            <li><a href="https://yagami26.github.io/category/technology.html"  aria-current="page" >Technology</a></li>
-        </ul></nav>
-        </header>
-        <main>
-<article>
+<aside>
+  <div>
+    <a href="https://yagami26.github.io/">
+      <img src="https://yagami26.github.io/images/straw-hat.jpg" alt="$ "khi" -tech" title="$ "khi" -tech">
+    </a>
+
+    <h1>
+      <a href="https://yagami26.github.io/">$ "khi" -tech</a>
+    </h1>
+
+    <p>writing about tech and randomness in universe</p>
+
+
+    <nav>
+      <ul class="list">
+
+
+            <li>
+              <a target="_self"
+                 href="https://yagami26.github.io/pages/about.html#about">
+                About
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://yagami26.github.io/pages/chess.html#chess">
+                Chess
+              </a>
+            </li>
+
+      </ul>
+    </nav>
+
+    <ul class="social">
+      <li>
+        <a class="sc-youtube"
+           href="https://youtube.com/@placeholder2128"
+           target="_blank">
+          <i class="fa-brands fa-youtube"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-linkedin"
+           href="https://www.linkedin.com/in/khirodkantnaik/"
+           target="_blank">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-github"
+           href="https://github.com/yagami26"
+           target="_blank">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-reddit"
+           href="https://www.reddit.com/user/Mr_Obi-Wan"
+           target="_blank">
+          <i class="fa-brands fa-reddit"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-rss"
+           href="/feeds/all.atom.xml"
+           target="_blank">
+          <i class="fa-solid fa-rss"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</aside>
+  <main>
+
+<nav>
+  <a href="https://yagami26.github.io/">Home</a>
+
+  <a href="/categories.html">Categories</a>
+  <a href="/tags.html">Tags</a>
+
+  <a href="https://yagami26.github.io/feeds/all.atom.xml">Atom</a>
+
+</nav>
+
+<article class="single">
   <header>
-    <h2>
-      <a href="https://yagami26.github.io/post-6.html" rel="bookmark"
-         title="Permalink to Implemented binary search trees in golang today">Implemented binary search trees in golang today</a></h2>
- 
+      
+    <h1 id="post-6">Implemented binary search trees in golang today</h1>
+    <p>
+      Posted on Mon 03 June 2024 in <a href="https://yagami26.github.io/category/technology.html">Technology</a>
+
+    </p>
   </header>
-  <p>I've been skipping writing because I was rather drunk on weekends. Today I decided to implement binary search trees in golang, because I always struggle with binary search tree style questions during interviews (<em>another nemesis of mine are arrays with greedy solutions</em>). It's high time I start working on taking down my nemesis, <em>chuckes!</em>   </p>
+
+
+  <div>
+    <p>I've been skipping writing because I was rather drunk on weekends. Today I decided to implement binary search trees in golang, because I always struggle with binary search tree style questions during interviews (<em>another nemesis of mine are arrays with greedy solutions</em>). It's high time I start working on taking down my nemesis, <em>chuckes!</em>   </p>
 <p>So, because I'm new to Golang, and pointers in it, I wanted to implement a simple binary search tree and in-order/sorted order traversal in it. Let's jump right into the code.  </p>
 <p>The node definition of BST looks like this. </p>
 <div class="highlight"><pre><span></span><code><span class="k">type</span><span class="w"> </span><span class="nx">Node</span><span class="w"> </span><span class="nx">struct</span><span class="w"> </span><span class="p">{</span>
@@ -180,29 +303,49 @@
 </code></pre></div>
 
 <p><strong><em>I must say I'm finally enjoying programming again, now that I started learning golang. I think I got lost some part of myself chasing meaningless things for the last 5-6 years and forgot the joy of programming and exploring things. I'm sure you will have plenty of good topics to read about in upcoming posts</em></strong></p>
-  <footer>
-    <p>Published: <time datetime="2024-06-03T21:32:00+05:30">
-      Mon 03 June 2024
-    </time></p>
-    <address>
-      By           <a href="https://yagami26.github.io/author/khirod.html">khirod</a>
-    </address>
+  </div>
+  <div class="tag-cloud">
     <p>
-        Category: <a href="https://yagami26.github.io/category/technology.html">Technology</a>
+      <a href="https://yagami26.github.io/tag/golang.html">golang</a>
+      <a href="https://yagami26.github.io/tag/dsa.html">dsa</a>
     </p>
-    <p>
-        Tags:
-            <a href="https://yagami26.github.io/tag/golang.html">golang</a>
-            <a href="https://yagami26.github.io/tag/dsa.html">dsa</a>
-    </p>
-  </footer>
-  </article>
-        </main>
-        <footer>
-                <address>
-                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
-                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
-                </address>
-        </footer>
+  </div>
+
+
+
+
+
+
+</article>
+
+<footer>
+<p>
+  &copy; 2025  - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/deed.en_US" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p></footer>  </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Khirod Blog ",
+  "url" : "https://yagami26.github.io",
+  "image": "https://yagami26.github.io/images/straw-hat.jpg",
+  "description": "Khirod Thoughts and Writings"
+}
+</script>
 </body>
 </html>
