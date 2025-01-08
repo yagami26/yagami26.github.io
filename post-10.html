@@ -1,166 +1,43 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="HandheldFriendly" content="True" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="" />
-
-  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" type="text/css" href="https://yagami26.github.io/theme/stylesheet/style.min.css">
-
-
-    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
-          href="https://yagami26.github.io/theme/pygments/github.min.css">
-
-
-
-  <link rel="stylesheet" type="text/css" href="https://yagami26.github.io/theme/font-awesome/css/fontawesome.css">
-  <link rel="stylesheet" type="text/css" href="https://yagami26.github.io/theme/font-awesome/css/brands.css">
-  <link rel="stylesheet" type="text/css" href="https://yagami26.github.io/theme/font-awesome/css/solid.css">
-
-
-  <link rel="shortcut icon" href="https://yagami26.github.io/images/favicon.ico" type="image/x-icon">
-  <link rel="icon" href="https://yagami26.github.io/images/favicon.ico" type="image/x-icon">
-
-
-  <link href="https://yagami26.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Khirod Blog Atom">
+          <title>Khirod Blog - InOrder Successor of a node in a BST [LeetCode Medium]</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="writing about tech and randomness in universe" />
+        <link href="https://yagami26.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Khirod Blog Full Atom Feed" />
+        <link href="https://yagami26.github.io/feeds/algorithms.atom.xml" type="application/atom+xml" rel="alternate" title="Khirod Blog Categories Atom Feed" />
 
 
 
 
-
-
-
-
- 
-
-<meta name="author" content="khirod" />
-<meta name="description" content="The problem - Inorder successor of node in a bst I had attempted the problem before but I was too focussed on not using any global variables when implementing the solution. I guess being a senior developer we just try to avoid using global variables. To be honest, I did end …" />
-<meta name="keywords" content="leetcode, binary-search-tree">
-
-
-  <meta property="og:site_name" content="Khirod Blog"/>
-  <meta property="og:title" content="InOrder Successor of a node in a BST [LeetCode Medium]"/>
-  <meta property="og:description" content="The problem - Inorder successor of node in a bst I had attempted the problem before but I was too focussed on not using any global variables when implementing the solution. I guess being a senior developer we just try to avoid using global variables. To be honest, I did end …"/>
-  <meta property="og:locale" content="en_US"/>
-  <meta property="og:url" content="https://yagami26.github.io/post-10.html"/>
-  <meta property="og:type" content="article"/>
-  <meta property="article:published_time" content="2024-06-17 20:58:00+05:30"/>
-  <meta property="article:modified_time" content=""/>
-  <meta property="article:author" content="https://yagami26.github.io/author/khirod.html">
-  <meta property="article:section" content="Algorithms"/>
-  <meta property="article:tag" content="leetcode"/>
-  <meta property="article:tag" content="binary-search-tree"/>
-  <meta property="og:image" content="https://yagami26.github.io/images/straw-hat.jpg">
-
-  <title>Khirod Blog &ndash; InOrder Successor of a node in a BST [LeetCode Medium]</title>
-
+    <meta name="tags" content="leetcode" />
+    <meta name="tags" content="binary-search-tree" />
 
 </head>
-<body class="light-theme">
 
-<aside>
-  <div>
-    <a href="https://yagami26.github.io/">
-      <img src="https://yagami26.github.io/images/straw-hat.jpg" alt="$ "khi" -tech" title="$ "khi" -tech">
-    </a>
-
-    <h1>
-      <a href="https://yagami26.github.io/">$ "khi" -tech</a>
-    </h1>
-
-    <p>writing about tech and randomness in universe</p>
-
-
-    <nav>
-      <ul class="list">
-
-
-            <li>
-              <a target="_self"
-                 href="https://yagami26.github.io/pages/about.html#about">
-                About
-              </a>
-            </li>
-            <li>
-              <a target="_self"
-                 href="https://yagami26.github.io/pages/chess.html#chess">
-                Chess
-              </a>
-            </li>
-
-      </ul>
-    </nav>
-
-    <ul class="social">
-      <li>
-        <a class="sc-youtube"
-           href="https://youtube.com/@placeholder2128"
-           target="_blank">
-          <i class="fa-brands fa-youtube"></i>
-        </a>
-      </li>
-      <li>
-        <a class="sc-linkedin"
-           href="https://www.linkedin.com/in/khirodkantnaik/"
-           target="_blank">
-          <i class="fa-brands fa-linkedin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="sc-github"
-           href="https://github.com/yagami26"
-           target="_blank">
-          <i class="fa-brands fa-github"></i>
-        </a>
-      </li>
-      <li>
-        <a class="sc-reddit"
-           href="https://www.reddit.com/user/Mr_Obi-Wan"
-           target="_blank">
-          <i class="fa-brands fa-reddit"></i>
-        </a>
-      </li>
-      <li>
-        <a class="sc-rss"
-           href="/feeds/all.atom.xml"
-           target="_blank">
-          <i class="fa-solid fa-rss"></i>
-        </a>
-      </li>
-    </ul>
-  </div>
-
-</aside>
-  <main>
-
-<nav>
-  <a href="https://yagami26.github.io/">Home</a>
-
-  <a href="/categories.html">Categories</a>
-  <a href="/tags.html">Tags</a>
-
-  <a href="https://yagami26.github.io/feeds/all.atom.xml">Atom</a>
-
-</nav>
-
-<article class="single">
+<body>
+        <header>
+              <hgroup><h1><a href="https://yagami26.github.io/">Khirod Blog</a></h1><p>writing about tech and randomness in universe</p></hgroup>
+        <nav><ul>
+            <li><a href="/categories.html">Categories</a></li>
+            <li><a href="/tags.html">Tags</a></li>
+            <li><a href="https://yagami26.github.io/pages/about.html" >About</a></li>
+            <li><a href="https://yagami26.github.io/pages/chess.html" >Chess</a></li>
+            <li><a href="https://yagami26.github.io/category/algorithms.html"  aria-current="page" >Algorithms</a></li>
+            <li><a href="https://yagami26.github.io/category/technology.html" >Technology</a></li>
+        </ul></nav>
+        </header>
+        <main>
+<article>
   <header>
-      
-    <h1 id="post-10">InOrder Successor of a node in a BST [LeetCode Medium]</h1>
-    <p>
-      Posted on Mon 17 June 2024 in <a href="https://yagami26.github.io/category/algorithms.html">Algorithms</a>
-
-    </p>
+    <h2>
+      <a href="https://yagami26.github.io/post-10.html" rel="bookmark"
+         title="Permalink to InOrder Successor of a node in a BST [LeetCode Medium]">InOrder Successor of a node in a BST [LeetCode Medium]</a></h2>
+ 
   </header>
-
-
-  <div>
-    <p>The problem - <a href="https://leetcode.com/problems/inorder-successor-in-bst/description">Inorder successor of node in a bst</a>  </p>
+  <p>The problem - <a href="https://leetcode.com/problems/inorder-successor-in-bst/description">Inorder successor of node in a bst</a>  </p>
 <p>I had attempted the problem before but I was too focussed on not using any global variables when implementing the solution. I guess being a senior developer we just try to avoid using global variables. To be honest, I did end up using the global variables at the end (<em>I sucked up my pride!</em>). I implemented two approaches here</p>
 <h3>Approach 1 (Naive Traversal)</h3>
 <p>The naive approach where you inorder traverse a BST and keep a track whether the target node has been found or not in a global variable and then find the next node which is greater than target node. You don't recurse the tree further if the in order successor is found. This solution beat ~53% of solutions at runtime. At worse case it will still be O(N) because it will traverse the entire tree at worst case.   </p>
@@ -246,49 +123,29 @@
 <h2>Learnings</h2>
 <p>I'm not going to write the original solution mentioned in the editorial, the solution they have mentioned is beautiful. Just as a hint to my future self remember that the trees can be traversed iteratively as well (especially binary search trees). Also iterative solutions will have a benefit of not having a global variable (<em>to satisfy my clean code thought process</em>) and  </p>
 <p>the main point being you can store solutions while iterating and start optimising when you store something in an iterative solution, i.e you don't have to wait for a recursion to end. I quite enjoyed solving this problem. </p>
-  </div>
-  <div class="tag-cloud">
+  <footer>
+    <p>Published: <time datetime="2024-06-17T20:58:00+05:30">
+      Mon 17 June 2024
+    </time></p>
+    <address>
+      By           <a href="https://yagami26.github.io/author/khirod.html">khirod</a>
+    </address>
     <p>
-      <a href="https://yagami26.github.io/tag/leetcode.html">leetcode</a>
-      <a href="https://yagami26.github.io/tag/binary-search-tree.html">binary-search-tree</a>
+        Category: <a href="https://yagami26.github.io/category/algorithms.html">Algorithms</a>
     </p>
-  </div>
-
-
-
-
-
-
-</article>
-
-<footer>
-<p>
-  &copy; 2024  - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/deed.en_US" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>
-</p>
-<p>
-Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
-</p><p>
-  <a rel="license"
-     href="http://creativecommons.org/licenses/by-sa/4.0/"
-     target="_blank">
-    <img alt="Creative Commons License"
-         title="Creative Commons License"
-         style="border-width:0"
-           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
-         width="80"
-         height="15"/>
-  </a>
-</p></footer>  </main>
-
-<script type="application/ld+json">
-{
-  "@context" : "http://schema.org",
-  "@type" : "Blog",
-  "name": " Khirod Blog ",
-  "url" : "https://yagami26.github.io",
-  "image": "https://yagami26.github.io/images/straw-hat.jpg",
-  "description": "Khirod Thoughts and Writings"
-}
-</script>
+    <p>
+        Tags:
+            <a href="https://yagami26.github.io/tag/leetcode.html">leetcode</a>
+            <a href="https://yagami26.github.io/tag/binary-search-tree.html">binary-search-tree</a>
+    </p>
+  </footer>
+  </article>
+        </main>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
 </body>
 </html>
