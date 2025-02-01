@@ -38,17 +38,27 @@
 
  
 
-    <meta name="author" content="khirod" />
-    <meta name="description" content="why do you need a site description as mandatory?" />
+<meta name="author" content="khirod" />
+<meta name="description" content="In my quest for building a perfect minimalist linux system, I decided to not use a waybar. I believe it wastes a lot of screen space and doesn&#39;t really give a minimalist vibe. While waybar does look pretty sexy, I think it also wastes a lot of space. Here is …" />
+<meta name="keywords" content="linux, arch, hyprland">
+
+
   <meta property="og:site_name" content="Khirod's Blog"/>
-  <meta property="og:type" content="blog"/>
-  <meta property="og:title" content="Khirod's Blog"/>
-  <meta property="og:description" content="why do you need a site description as mandatory?"/>
+  <meta property="og:title" content="Improving my Hyprland WM setup"/>
+  <meta property="og:description" content="In my quest for building a perfect minimalist linux system, I decided to not use a waybar. I believe it wastes a lot of screen space and doesn&#39;t really give a minimalist vibe. While waybar does look pretty sexy, I think it also wastes a lot of space. Here is …"/>
   <meta property="og:locale" content="en_US"/>
-  <meta property="og:url" content="https://yagami26.github.io"/>
+  <meta property="og:url" content="https://yagami26.github.io/post-15.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2025-02-01 16:13:00+05:30"/>
+  <meta property="article:modified_time" content=""/>
+  <meta property="article:author" content="https://yagami26.github.io/author/khirod.html">
+  <meta property="article:section" content="Linux"/>
+  <meta property="article:tag" content="linux"/>
+  <meta property="article:tag" content="arch"/>
+  <meta property="article:tag" content="hyprland"/>
   <meta property="og:image" content="https://yagami26.github.io/images/straw-hat.jpg">
 
-  <title>Khirod's Blog &ndash; Tags</title>
+  <title>Khirod's Blog &ndash; Improving my Hyprland WM setup</title>
 
 
 </head>
@@ -141,28 +151,36 @@
 
 <article class="single">
   <header>
-    <h1 id="tags">Tags</h1>
+      
+    <h1 id="post-15">Improving my Hyprland WM setup</h1>
+    <p>
+      Posted on Sat 01 February 2025 in <a href="https://yagami26.github.io/category/linux.html">Linux</a>
+
+    </p>
   </header>
+
+
   <div>
-    <ul class="list">          <li><a href="https://yagami26.github.io/tag/arch.html">arch</a> (1)</li>
-          <li><a href="https://yagami26.github.io/tag/binary-search-tree.html">binary-search-tree</a> (3)</li>
-          <li><a href="https://yagami26.github.io/tag/chess.html">chess</a> (2)</li>
-          <li><a href="https://yagami26.github.io/tag/chessdojo.html">chessdojo</a> (2)</li>
-          <li><a href="https://yagami26.github.io/tag/dsa.html">dsa</a> (1)</li>
-          <li><a href="https://yagami26.github.io/tag/dynamic-programming.html">dynamic-programming</a> (1)</li>
-          <li><a href="https://yagami26.github.io/tag/golang.html">golang</a> (5)</li>
-          <li><a href="https://yagami26.github.io/tag/guitar.html">guitar</a> (1)</li>
-          <li><a href="https://yagami26.github.io/tag/hyprland.html">hyprland</a> (2)</li>
-          <li><a href="https://yagami26.github.io/tag/leetcode.html">leetcode</a> (4)</li>
-          <li><a href="https://yagami26.github.io/tag/linux.html">linux</a> (4)</li>
-          <li><a href="https://yagami26.github.io/tag/lsp.html">lsp</a> (1)</li>
-          <li><a href="https://yagami26.github.io/tag/music.html">music</a> (1)</li>
-          <li><a href="https://yagami26.github.io/tag/neovim.html">neovim</a> (2)</li>
-          <li><a href="https://yagami26.github.io/tag/qtile.html">qtile</a> (2)</li>
-          <li><a href="https://yagami26.github.io/tag/syntax.html">syntax</a> (2)</li>
-          <li><a href="https://yagami26.github.io/tag/vim.html">vim</a> (1)</li>
-    </ul>
+    <p>In my quest for building a perfect minimalist linux system, I decided to not use a waybar. I believe it wastes a lot of screen space and doesn't really give a minimalist vibe. While waybar does look pretty sexy, I think it also wastes a lot of space. Here is how my waybar looked like <img alt="Image" src="https://yagami26.github.io/images/waybar-snapshot.png"></p>
+<p>You'll notice it has everything, a battery monitor (fish icon), cpu usage or memory usage stats, current time/date etc. It has a workspace switcher too, it was useful for me to know which is the current (1..9) workspace. It all looked cool, but I think these docks are inspired by mac, and I didn't like the idea of wasting screen space. Think about it when you're actually working on something, how often do you look on time or the topmost panels, I reckon rarely.  </p>
+<p>So I decided to ditch waybar completely from the configuration and instead use <a href="https://github.com/hyprwm/hyprland-plugins/tree/main/hyprexpo">hyprexpo</a> which is a hyprland plugin. I built the latest version of hyprland from git using yay and installed this hyprexpo plugin. </p>
+<p>The next thing I missed was having a notification system. But <code>dunst</code> is a good way to achieve notifications too. Here is a sample notification and the entire configuration can be seen in my dotfiles. <img alt="Image" src="https://yagami26.github.io/images/dunst-sample-notification.png">.  </p>
+<p>My first application during startup is <code>wtfutil</code> which will create a small dashboard on workspace 1, so I can read hackernews there, or check memory and cpu usage and also do stuff like keeping todo notes. It's very extensible and has its own configuration file.</p>
+<p>Overall I'm quite satisfied with how my system looks now. <img alt="Image" src="https://yagami26.github.io/images/hyprland-no-waybar.png"></p>
   </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://yagami26.github.io/tag/linux.html">linux</a>
+      <a href="https://yagami26.github.io/tag/arch.html">arch</a>
+      <a href="https://yagami26.github.io/tag/hyprland.html">hyprland</a>
+    </p>
+  </div>
+
+
+
+
+
+
 </article>
 
 <footer>
