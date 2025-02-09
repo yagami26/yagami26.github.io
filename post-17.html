@@ -39,23 +39,26 @@
  
 
 <meta name="author" content="khirod" />
-<meta name="description" content="Self Analysis window.addEventListener(&#34;message&#34;,e=&gt;{e[&#39;data&#39;]&amp;&amp;&#34;12772077&#34;===e[&#39;data&#39;][&#39;id&#39;]&amp;&amp;document.getElementById(`${e[&#39;data&#39;][&#39;id&#39;]}`)&amp;&amp;(document.getElementById(`${e[&#39;data&#39;][&#39;id&#39;]}`).style.height=`${e[&#39;data&#39;][&#39;frameHeight&#39;]+37}px`)}); Findings" />
-<meta name="keywords" content="">
+<meta name="description" content="From silman endgames that as long as two kings are on board opposition exists. It&#39;s a little easier to determine when the king and pawn were placed only one square in front of each other, and whoever had to move didn&#39;t have opposition back then. There are other forms of …" />
+<meta name="keywords" content="chess, endgames, chess-theory">
 
 
   <meta property="og:site_name" content="Khirod's Blog"/>
-  <meta property="og:title" content="Game-2"/>
-  <meta property="og:description" content="Self Analysis window.addEventListener(&#34;message&#34;,e=&gt;{e[&#39;data&#39;]&amp;&amp;&#34;12772077&#34;===e[&#39;data&#39;][&#39;id&#39;]&amp;&amp;document.getElementById(`${e[&#39;data&#39;][&#39;id&#39;]}`)&amp;&amp;(document.getElementById(`${e[&#39;data&#39;][&#39;id&#39;]}`).style.height=`${e[&#39;data&#39;][&#39;frameHeight&#39;]+37}px`)}); Findings"/>
+  <meta property="og:title" content="Various forms of opposition in chess"/>
+  <meta property="og:description" content="From silman endgames that as long as two kings are on board opposition exists. It&#39;s a little easier to determine when the king and pawn were placed only one square in front of each other, and whoever had to move didn&#39;t have opposition back then. There are other forms of …"/>
   <meta property="og:locale" content="en_US"/>
-  <meta property="og:url" content="https://yagami26.github.io/game-2.html"/>
+  <meta property="og:url" content="https://yagami26.github.io/post-17.html"/>
   <meta property="og:type" content="article"/>
-  <meta property="article:published_time" content="2024-02-06 08:04:00+05:30"/>
+  <meta property="article:published_time" content="2025-02-09 11:59:00+05:30"/>
   <meta property="article:modified_time" content=""/>
   <meta property="article:author" content="https://yagami26.github.io/author/khirod.html">
-  <meta property="article:section" content="chess-games"/>
+  <meta property="article:section" content="Chess"/>
+  <meta property="article:tag" content="chess"/>
+  <meta property="article:tag" content="endgames"/>
+  <meta property="article:tag" content="chess-theory"/>
   <meta property="og:image" content="https://yagami26.github.io/images/straw-hat.jpg">
 
-  <title>Khirod's Blog &ndash; Game-2</title>
+  <title>Khirod's Blog &ndash; Various forms of opposition in chess</title>
 
 
 </head>
@@ -149,23 +152,42 @@
 <article class="single">
   <header>
       
-    <h1 id="game-2">Game-2</h1>
+    <h1 id="post-17">Various forms of opposition in chess</h1>
     <p>
-      Posted on Tue 06 February 2024 in <a href="https://yagami26.github.io/category/chess-games.html">chess-games</a>
+      Posted on Sun 09 February 2025 in <a href="https://yagami26.github.io/category/chess.html">Chess</a>
 
     </p>
   </header>
 
 
   <div>
-    <h2>Self Analysis</h2>
-<iframe id="12772077" allowtransparency="true" frameborder="0" style="width:100%;border:none;heigh:300px;" src="https://www.chess.com/emboard?id=12772077"></iframe>
-<script nonce="chesscom-diagram">window.addEventListener("message",e=>{e['data']&&"12772077"===e['data']['id']&&document.getElementById(`${e['data']['id']}`)&&(document.getElementById(`${e['data']['id']}`).style.height=`${e['data']['frameHeight']+37}px`)});</script>
-
-<h2>Findings</h2>
+    <p>From silman endgames that as long as two kings are on board opposition exists. It's a little easier to determine when the king and pawn were placed only one square in front of each other, and whoever had to move didn't have opposition back then. There are other forms of opposition</p>
+<h2>Diagonal Opposition</h2>
+<p>The same concept applies for when both the kings are on diagonals. See the below image <img alt="diagonal-opposition" src="https://yagami26.github.io/images/diagonal-opposition.png">. Here the white king on d4 and black king on h8 are on same black diagonal, also notice the number of squares in between the diagonal is 3, since there is odd number of squares between them whoever has to move doesn't have the opposition.  </p>
+<p>If you think about it it's not so different from the last post where the kings were on same file and separated by just one square and whoever had to move had lost the opposition. </p>
+<p>The same applies for black king at a8 and white king at c6, whoever moves loses the opposition.</p>
+<blockquote>
+<p>Rule - Whenever kings occupy the same diagonal, and if there exists an odd number of squares between them, then the side to move doesn't have opposition.</p>
+</blockquote>
+<h2>Distant Opposition</h2>
+<p>This is not so different from diagonal opposition but the opposition which exists when the kings occupy the same file. Again the rule is same, if the number of squares between them are odd, then whoever moves has lost the opposition. <img alt="distant-opposition" src="https://yagami26.github.io/images/distant-opposition.png"> here whoever has to move will win the opposition as there are even number of squares between them. </p>
+<h2>Magic Square Opposition (Box Opposition)</h2>
+<p>But what about if both the kings don't occupy a similar color and also appear on different ranks and files. Consider the below image <img alt="box-opposition" src="https://yagami26.github.io/images/box-opposition.png"></p>
+<p>Here the concept of opposition applies again, whoever has to move can gain the opposition here by simplifying the position to one form of opposition we already know about, in this case the position can be reduced to diagonal opposition.  </p>
+<p>White moves by moving to Ka2 gaining distant opposition and having odd number of squares.
+Black moves by moving to Kg7 and gaining distant opposition with odd number of squares in between. </p>
+<p>Notice if both the king kept walking towards each other, we would again gain a simpler form of 1 square opposition we are already familiar with. </p>
+<blockquote>
+<p>Rule - Whoever has to move should construct a box which should contain both kings at diagonals and all the edges of the box should have same color, to obtain the opposition. </p>
+</blockquote>
+<h1>Examples (WIP)</h1>
+<p>Of course this knowledge of opposition means a little if I cannot apply them successfully in the games. I'm currently practicing the endgames on chess.com to ensure that I am able to reason the best move or worst correctly. This post will be updated by examples</p>
   </div>
   <div class="tag-cloud">
     <p>
+      <a href="https://yagami26.github.io/tag/chess.html">chess</a>
+      <a href="https://yagami26.github.io/tag/endgames.html">endgames</a>
+      <a href="https://yagami26.github.io/tag/chess-theory.html">chess-theory</a>
     </p>
   </div>
 
