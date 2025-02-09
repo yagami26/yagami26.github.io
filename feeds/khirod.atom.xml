@@ -1,19 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Khirod's Blog - khirod</title><link href="https://yagami26.github.io/" rel="alternate"></link><link href="https://yagami26.github.io/feeds/khirod.atom.xml" rel="self"></link><id>https://yagami26.github.io/</id><updated>2025-02-09T11:59:00+05:30</updated><subtitle>writing about tech and randomness in universe</subtitle><entry><title>Various forms of opposition in chess</title><link href="https://yagami26.github.io/post-17.html" rel="alternate"></link><published>2025-02-09T11:59:00+05:30</published><updated>2025-02-09T11:59:00+05:30</updated><author><name>khirod</name></author><id>tag:yagami26.github.io,2025-02-09:/post-17.html</id><summary type="html">&lt;p&gt;From silman endgames that as long as two kings are on board opposition exists. It's a little easier to determine when the king and pawn were placed only one square in front of each other, and whoever had to move didn't have opposition back then. There are other forms of …&lt;/p&gt;</summary><content type="html">&lt;p&gt;From silman endgames that as long as two kings are on board opposition exists. It's a little easier to determine when the king and pawn were placed only one square in front of each other, and whoever had to move didn't have opposition back then. There are other forms of opposition&lt;/p&gt;
 &lt;h2&gt;Diagonal Opposition&lt;/h2&gt;
-&lt;p&gt;The same concept applies for when both the kings are on diagonals. See the below image &lt;img src="https://yagami26.github.io/images/diagonal-opposition.png" alt="Sample Image" height="300", width="300"&gt; Here the white king on d4 and black king on h8 are on same black diagonal, also notice the number of squares in between the diagonal is 3, since there is odd number of squares between them whoever has to move doesn't have the opposition.  &lt;/p&gt;
+&lt;p&gt;The same concept applies for when both the kings are on diagonals. See the below image &lt;/p&gt;
+&lt;p&gt;&lt;img src="https://yagami26.github.io/images/diagonal-opposition.png" alt="Sample Image" height="300", width="300"&gt;  &lt;/p&gt;
+&lt;p&gt;Here the white king on d4 and black king on h8 are on same black diagonal, also notice the number of squares in between the diagonal is 3, since there is odd number of squares between them whoever has to move doesn't have the opposition.  &lt;/p&gt;
 &lt;p&gt;If you think about it it's not so different from the last post where the kings were on same file and separated by just one square and whoever had to move had lost the opposition. &lt;/p&gt;
 &lt;p&gt;The same applies for black king at a8 and white king at c6, whoever moves loses the opposition.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Rule - Whenever kings occupy the same diagonal, and if there exists an odd number of squares between them, then the side to move doesn't have opposition.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2&gt;Distant Opposition&lt;/h2&gt;
-&lt;p&gt;This is not so different from diagonal opposition but the opposition which exists when the kings occupy the same file. Again the rule is same, if the number of squares between them are odd, then whoever moves has lost the opposition. &lt;img src="https://yagami26.github.io/images/distant-opposition.png" alt="Sample Image" height="300", width="300"&gt; here whoever has to move will win the opposition as there are even number of squares between them. &lt;/p&gt;
+&lt;p&gt;This is not so different from diagonal opposition but the opposition which exists when the kings occupy the same file. Again the rule is same, if the number of squares between them are odd, then whoever moves has lost the opposition.&lt;br&gt;
+&lt;img src="https://yagami26.github.io/images/distant-opposition.png" alt="Sample Image" height="300", width="300"&gt;  &lt;/p&gt;
+&lt;p&gt;Here whoever has to move will win the opposition as there are even number of squares between them.   &lt;/p&gt;
 &lt;h2&gt;Magic Square Opposition (Box Opposition)&lt;/h2&gt;
-&lt;p&gt;But what about if both the kings don't occupy a similar color and also appear on different ranks and files. Consider the below image &lt;img src="https://yagami26.github.io/images/box-opposition.png" alt="Sample Image" height="300", width="300"&gt;&lt;/p&gt;
+&lt;p&gt;But what about if both the kings don't occupy a similar color and also appear on different ranks and files. Consider the below image  &lt;/p&gt;
+&lt;p&gt;&lt;img src="https://yagami26.github.io/images/box-opposition.png" alt="Sample Image" height="300", width="300"&gt;  &lt;/p&gt;
 &lt;p&gt;Here the concept of opposition applies again, whoever has to move can gain the opposition here by simplifying the position to one form of opposition we already know about, in this case the position can be reduced to diagonal opposition.  &lt;/p&gt;
-&lt;p&gt;White moves by moving to Ka2 gaining distant opposition and having odd number of squares.
-Black moves by moving to Kg7 and gaining distant opposition with odd number of squares in between. &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;White moves by moving to Ka2 gaining distant opposition and having odd number of squares.&lt;/li&gt;
+&lt;li&gt;Black moves by moving to Kg7 and gaining distant opposition with odd number of squares in between. &lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;Notice if both the king kept walking towards each other, we would again gain a simpler form of 1 square opposition we are already familiar with. &lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Rule - Whoever has to move should construct a box which should contain both kings at diagonals and all the edges of the box should have same color, to obtain the opposition. &lt;/p&gt;
