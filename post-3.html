@@ -1,172 +1,38 @@
-
-<!DOCTYPE html>
-<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="HandheldFriendly" content="True" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" type="text/css" href="https://yagami26.github.io/theme/stylesheet/style.min.css">
+    
+        <title>Day 2 of learning golang with leetcode</title>
+    
 
 
-    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
-          href="https://yagami26.github.io/theme/pygments/github.min.css">
+    
 
-
-
-  <link rel="stylesheet" type="text/css" href="https://yagami26.github.io/theme/font-awesome/css/fontawesome.css">
-  <link rel="stylesheet" type="text/css" href="https://yagami26.github.io/theme/font-awesome/css/brands.css">
-  <link rel="stylesheet" type="text/css" href="https://yagami26.github.io/theme/font-awesome/css/solid.css">
-
-
-  <link rel="shortcut icon" href="https://yagami26.github.io/images/favicon.ico" type="image/x-icon">
-  <link rel="icon" href="https://yagami26.github.io/images/favicon.ico" type="image/x-icon">
-
-
-  <link href="https://yagami26.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Khirod's Blog Atom">
-
-
-
-
-
-
-
-
- 
-
-<meta name="author" content="khirod" />
-<meta name="description" content="I managed to solve 3 simple implementation problems today, all 3 related to string manipulation of some kind. I used the most brute force way to solve the problems, however I should check out the leetcode pattern for string problems. The thing is, I didn&#39;t want to go too quickly …" />
-<meta name="keywords" content="golang, leetcode">
-
-
-  <meta property="og:site_name" content="Khirod's Blog"/>
-  <meta property="og:title" content="Day 2 of learning golang with leetcode"/>
-  <meta property="og:description" content="I managed to solve 3 simple implementation problems today, all 3 related to string manipulation of some kind. I used the most brute force way to solve the problems, however I should check out the leetcode pattern for string problems. The thing is, I didn&#39;t want to go too quickly …"/>
-  <meta property="og:locale" content="en_US"/>
-  <meta property="og:url" content="https://yagami26.github.io/post-3.html"/>
-  <meta property="og:type" content="article"/>
-  <meta property="article:published_time" content="2024-05-23 22:15:00+05:30"/>
-  <meta property="article:modified_time" content=""/>
-  <meta property="article:author" content="https://yagami26.github.io/author/khirod.html">
-  <meta property="article:section" content="Technology"/>
-  <meta property="article:tag" content="golang"/>
-  <meta property="article:tag" content="leetcode"/>
-  <meta property="og:image" content="https://yagami26.github.io/images/straw-hat.jpg">
-
-  <title>Khirod's Blog &ndash; Day 2 of learning golang with leetcode</title>
-
-
+    <link rel="icon" href="/assets/img/favicon.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700">
+    <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8000/theme/css/main.css">
 </head>
-<body class="light-theme">
 
-<aside>
-  <div>
-    <a href="https://yagami26.github.io/">
-      <img src="https://yagami26.github.io/images/straw-hat.jpg" alt="Khirod's Blog" title="Khirod's Blog">
-    </a>
+<body>
 
-    <h1>
-      <a href="https://yagami26.github.io/">Khirod's Blog</a>
-    </h1>
-
-    <p>writing about tech and randomness in universe</p>
-
-
-    <nav>
-      <ul class="list">
-
-
-            <li>
-              <a target="_self"
-                 href="https://yagami26.github.io/pages/about.html#about">
-                About
-              </a>
-            </li>
-            <li>
-              <a target="_self"
-                 href="https://yagami26.github.io/pages/chess.html#chess">
-                Chess
-              </a>
-            </li>
-            <li>
-              <a target="_self"
-                 href="https://yagami26.github.io/pages/pages.html#pages">
-                Pages
-              </a>
-            </li>
-
-      </ul>
-    </nav>
-
-    <ul class="social">
-      <li>
-        <a class="sc-youtube"
-           href="https://youtube.com/@og-oppaihunter"
-           target="_blank">
-          <i class="fa-brands fa-youtube"></i>
-        </a>
-      </li>
-      <li>
-        <a class="sc-linkedin"
-           href="https://www.linkedin.com/in/khirodkantnaik/"
-           target="_blank">
-          <i class="fa-brands fa-linkedin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="sc-github"
-           href="https://github.com/yagami26"
-           target="_blank">
-          <i class="fa-brands fa-github"></i>
-        </a>
-      </li>
-      <li>
-        <a class="sc-reddit"
-           href="https://www.reddit.com/user/Mr_Obi-Wan"
-           target="_blank">
-          <i class="fa-brands fa-reddit"></i>
-        </a>
-      </li>
-      <li>
-        <a class="sc-rss"
-           href="/feeds/all.atom.xml"
-           target="_blank">
-          <i class="fa-solid fa-rss"></i>
-        </a>
-      </li>
-    </ul>
-  </div>
-
-</aside>
-  <main>
-
-<nav>
-  <a href="https://yagami26.github.io/">Home</a>
-
-  <a href="/categories.html">Categories</a>
-  <a href="/tags.html">Tags</a>
-
-  <a href="https://yagami26.github.io/feeds/all.atom.xml">Atom</a>
-
-</nav>
-
-<article class="single">
-  <header>
-      
-    <h1 id="post-3">Day 2 of learning golang with leetcode</h1>
-    <p>
-      Posted on Thu 23 May 2024 in <a href="https://yagami26.github.io/category/technology.html">Technology</a>
-
-    </p>
-  </header>
-
-
-  <div>
-    <p>I managed to solve 3 simple implementation problems today, all 3 related to string manipulation of some kind. I used the most brute force way to solve the problems, however I should check out the leetcode pattern for string problems. The thing is, I didn't want to go too quickly into the solution pattern as I am learning the implementation and I'm sure such problems will be arriving soon.  </p>
+    <div class="wrapper">
+        <div class="post">
+	<div class="post__back">
+    	<a href="http://127.0.0.1:8000">&lt;-- home</a>
+    </div>
+    <div class="post__title">
+    	<h1>Day 2 of learning golang with leetcode</h1>
+    </div>
+    <div class="post__date">
+    	<p>May 23, 2024</p>
+    </div>
+    <div class="post__meta">
+    	<p></p>
+    </div>
+    <div class="post__content" ?="">
+	<p>I managed to solve 3 simple implementation problems today, all 3 related to string manipulation of some kind. I used the most brute force way to solve the problems, however I should check out the leetcode pattern for string problems. The thing is, I didn't want to go too quickly into the solution pattern as I am learning the implementation and I'm sure such problems will be arriving soon.  </p>
 <p>Anyway here's the code for all the problems and the links to the problem, so that I can review the syntax used.</p>
 <p><a href="https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string">Problem1</a></p>
 <div class="highlight"><pre><span></span><code><span class="n">func</span><span class="w"> </span><span class="n">strStr</span><span class="p">(</span><span class="n">haystack</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">needle</span><span class="w"> </span><span class="n">string</span><span class="p">)</span><span class="w"> </span><span class="nc">int</span><span class="w"> </span><span class="err">{</span>
@@ -256,49 +122,12 @@
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">true</span>
 <span class="err">}</span>
 </code></pre></div>
-  </div>
-  <div class="tag-cloud">
-    <p>
-      <a href="https://yagami26.github.io/tag/golang.html">golang</a>
-      <a href="https://yagami26.github.io/tag/leetcode.html">leetcode</a>
-    </p>
-  </div>
+    </div>
+</div>
+
+    </div>
 
 
 
 
-
-
-</article>
-
-<footer>
-<p>
-  &copy; 2025  - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/deed.en_US" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>
-</p>
-<p>
-Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
-</p><p>
-  <a rel="license"
-     href="http://creativecommons.org/licenses/by-sa/4.0/"
-     target="_blank">
-    <img alt="Creative Commons License"
-         title="Creative Commons License"
-         style="border-width:0"
-           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
-         width="80"
-         height="15"/>
-  </a>
-</p></footer>  </main>
-
-<script type="application/ld+json">
-{
-  "@context" : "http://schema.org",
-  "@type" : "Blog",
-  "name": " Khirod's Blog ",
-  "url" : "https://yagami26.github.io",
-  "image": "https://yagami26.github.io/images/straw-hat.jpg",
-  "description": "why do you need a site description as mandatory?"
-}
-</script>
 </body>
-</html>
