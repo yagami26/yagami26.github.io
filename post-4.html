@@ -1,0 +1,55 @@
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    
+        <title>How to copy from vim to global clipboard on linux</title>
+    
+
+
+    
+
+    <link rel="icon" href="/assets/img/favicon.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700">
+    <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8000/theme/css/main.css">
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <div class="post">
+	<div class="post__back">
+    	<a href="http://127.0.0.1:8000">&lt;-- home</a>
+    </div>
+    <div class="post__title">
+    	<h1>How to copy from vim to global clipboard on linux</h1>
+    </div>
+    <div class="post__date">
+    	<p>May 24, 2024</p>
+    </div>
+    <div class="post__meta">
+    	<p></p>
+    </div>
+    <div class="post__content" ?="">
+	<p>Having installed arch linux again, I am going back to vim style of editing the files. I use neovim specifically and recently I struggled with how to yank lines from your editor to a global clipboard. This is needed at times when you want to copy something from your editor like code for eg to a clipboard and paste it in browser.  </p>
+<p>I didn't knew that anything which is yanked or deleted in vim is stored into a register. To see the current content of all the registers, run <code>:reg</code> in command mode. </p>
+<p>How to copy  </p>
+<ul>
+<li>
+<p>First you have to go into visual mode in vim using <code>Shift + V</code> then you can select the lines you want to copy, if it is the entire thing to end of file then you can also press <code>G</code>.  </p>
+</li>
+<li>
+<p>Once the lines are selected the next step is to yank them into a system clipboard register. In case of system clipboard in linux the register is <code>+</code>. So to copy into clipboard we simply do it using <code>"+y</code> to yank the selected lines in visual mode</p>
+</li>
+</ul>
+<p>I am really curious about the functionalities of registers in vim now. After all it's called one of the most powerful editors with a high learning curve due to a reason. Haha</p>
+    </div>
+</div>
+
+    </div>
+
+
+
+
+</body>

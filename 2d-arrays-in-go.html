@@ -1,0 +1,68 @@
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    
+        <title>Creating 2-D arrays in golang</title>
+    
+
+
+    
+
+    <link rel="icon" href="/assets/img/favicon.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700">
+    <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8000/theme/css/main.css">
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <div class="post">
+	<div class="post__back">
+    	<a href="http://127.0.0.1:8000">&lt;-- home</a>
+    </div>
+    <div class="post__title">
+    	<h1>Creating 2-D arrays in golang</h1>
+    </div>
+    <div class="post__date">
+    	<p>May 21, 2024</p>
+    </div>
+    <div class="post__meta">
+    	<p></p>
+    </div>
+    <div class="post__content" ?="">
+	<p>I was doing leetcode problems because being prepared doesn't harm anyone, haha, and I'm also trying to learn golang in parallel. Going through the basic syntax currently and a lot of time scenarios arise where you have to initialise a 2-D array eg- graphs, or for dynamic programming problems. Here we use built-in <code>make</code> function to create a slice in golang. So this implementation is a slice of slices. I read there is other way of creating 2D arrays as well but I'll explore that later as this seems simpler to me.  </p>
+<div class="highlight"><pre><span></span><code><span class="n">package</span><span class="w"> </span><span class="n">main</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="s2">&quot;fmt&quot;</span>
+
+<span class="n">func</span><span class="w"> </span><span class="n">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">const</span><span class="w"> </span><span class="n">columns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="w">    </span><span class="n">const</span><span class="w"> </span><span class="n">rows</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="nv">multiDimensionalArray</span><span class="w"> </span><span class="p">[][]</span><span class="nb">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">make</span><span class="p">([][]</span><span class="nb">int</span><span class="p">,</span><span class="w"> </span><span class="n">rows</span><span class="p">);</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">rows</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">multiDimensionalArray</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">make</span><span class="p">([]</span><span class="nb">int</span><span class="p">,</span><span class="w"> </span><span class="n">columns</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">Accessing</span><span class="w"> </span><span class="n">rows</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">columns</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">rows</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">columns</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">multiDimensionalArray</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">multiDimensionalArray</span><span class="p">);</span>
+
+<span class="p">}</span>
+</code></pre></div>
+    </div>
+</div>
+
+    </div>
+
+
+
+
+</body>

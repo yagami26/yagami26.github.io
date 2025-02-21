@@ -1,0 +1,186 @@
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    
+        <title>Implemented binary search trees in golang today</title>
+    
+
+
+    
+
+    <link rel="icon" href="/assets/img/favicon.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700">
+    <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8000/theme/css/main.css">
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <div class="post">
+	<div class="post__back">
+    	<a href="http://127.0.0.1:8000">&lt;-- home</a>
+    </div>
+    <div class="post__title">
+    	<h1>Implemented binary search trees in golang today</h1>
+    </div>
+    <div class="post__date">
+    	<p>Jun 03, 2024</p>
+    </div>
+    <div class="post__meta">
+    	<p></p>
+    </div>
+    <div class="post__content" ?="">
+	<p>I've been skipping writing because I was rather drunk on weekends. Today I decided to implement binary search trees in golang, because I always struggle with binary search tree style questions during interviews (<em>another nemesis of mine are arrays with greedy solutions</em>). It's high time I start working on taking down my nemesis, <em>chuckes!</em>   </p>
+<p>So, because I'm new to Golang, and pointers in it, I wanted to implement a simple binary search tree and in-order/sorted order traversal in it. Let's jump right into the code.  </p>
+<p>The node definition of BST looks like this. </p>
+<div class="highlight"><pre><span></span><code><span class="k">type</span><span class="w"> </span><span class="nx">Node</span><span class="w"> </span><span class="nx">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">left</span><span class="w"> </span><span class="o">*</span><span class="nx">Node</span>
+<span class="w">    </span><span class="nx">right</span><span class="w"> </span><span class="o">*</span><span class="nx">Node</span>
+<span class="w">    </span><span class="nx">val</span><span class="w"> </span><span class="nx">int64</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>In fact, it's not very different from C style pointers and structs that I'm already used to when I learnt them in college. Next we needed to implement two functions  </p>
+<ul>
+<li>To implement the addNode function to add new nodes to a binary search tree, which always returns the root pointer. </li>
+<li>To implement an inOrder traversal function left -&gt; root -&gt; right</li>
+</ul>
+<p>Alright so implmentation is like this  </p>
+<div class="highlight"><pre><span></span><code><span class="k">func</span><span class="w"> </span><span class="n">addNode</span><span class="p">(</span><span class="n">root</span><span class="w"> </span><span class="o">*</span><span class="n">Node</span><span class="p">,</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="n">int64</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="n">Node</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">root</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">Node</span><span class="p">{</span><span class="n">val</span><span class="p">:</span><span class="w"> </span><span class="n">val</span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">root</span><span class="o">.</span><span class="n">val</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">root</span><span class="o">.</span><span class="n">right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">addNode</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">right</span><span class="p">,</span><span class="w"> </span><span class="n">val</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">root</span><span class="o">.</span><span class="n">left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">addNode</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">left</span><span class="p">,</span><span class="w"> </span><span class="n">val</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">root</span>
+<span class="p">}</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">traverseInOrder</span><span class="p">(</span><span class="n">root</span><span class="w"> </span><span class="o">*</span><span class="n">Node</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">root</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">root</span><span class="o">.</span><span class="n">left</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">traverseInOrder</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">left</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">root</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">root</span><span class="o">.</span><span class="n">right</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">traverseInOrder</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Now I knew the functions looked correct, but I decided run a large number of auto generated test cases. The next step was to modify the <code>traverseInOrder</code> function to a function which returns a slice of integers, so I updated it to return []int64 instead  </p>
+<div class="highlight"><pre><span></span><code><span class="k">func</span><span class="w"> </span><span class="n">traverseInOrderModified</span><span class="p">(</span><span class="n">root</span><span class="w"> </span><span class="o">*</span><span class="n">Node</span><span class="p">)</span><span class="w"> </span><span class="p">[]</span><span class="n">int64</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">output</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">make</span><span class="p">([]</span><span class="n">int64</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">root</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">output</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">root</span><span class="o">.</span><span class="n">left</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">traverseInOrderModified</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">left</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">append</span><span class="p">(</span><span class="n">output</span><span class="p">,</span><span class="w"> </span><span class="n">root</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">root</span><span class="o">.</span><span class="n">right</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">append</span><span class="p">(</span><span class="n">output</span><span class="p">,</span><span class="w"> </span><span class="n">traverseInOrderModified</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">right</span><span class="p">)</span><span class="o">...</span><span class="p">)</span><span class="w">  </span><span class="o">//</span><span class="w"> </span><span class="n">notice</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">variadic</span><span class="w"> </span><span class="n">function</span><span class="w"> </span><span class="s2">&quot;...&quot;</span><span class="w"> </span><span class="n">which</span><span class="w"> </span><span class="n">unpacks</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">slice</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">output</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>To generate test cases and do the sorting and verification I wrote a helper function and in this way, got to learn a little more about <code>sort</code> package in golang, and <code>copy</code> function, also how to compare two slices using <code>reflect.DeepEqual</code> I also learnt that by default <code>sort.Ints([]int)</code> is available in the standard library and doesn't require imports. But if you want to sort <code>[]int64</code> then you need to implement some custom function. (<em>Due to lack of knowledge I don't know what the helper function is called yet, I'm sure there is some term for it, like comparators in Java</em>). Anyway here are the functions I wrote  </p>
+<div class="highlight"><pre><span></span><code><span class="k">func</span><span class="w"> </span><span class="n">generateRandomInt64Slice</span><span class="p">(</span><span class="nb">min</span><span class="w"> </span><span class="n">int64</span><span class="p">,</span><span class="w"> </span><span class="nb">max</span><span class="w"> </span><span class="n">int64</span><span class="p">)</span><span class="w"> </span><span class="p">[]</span><span class="n">int64</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="o">//</span><span class="w"> </span><span class="n">Initialize</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">slice</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="mi">100</span>
+<span class="w">  </span><span class="n">slice</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">make</span><span class="p">([]</span><span class="n">int64</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span>
+
+<span class="w">  </span><span class="o">//</span><span class="w"> </span><span class="n">Seed</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">random</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="n">generator</span><span class="w"> </span><span class="p">(</span><span class="n">optional</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">better</span><span class="w"> </span><span class="n">randomness</span><span class="p">)</span>
+<span class="w">  </span><span class="n">rand</span><span class="o">.</span><span class="n">Seed</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">Now</span><span class="p">()</span><span class="o">.</span><span class="n">UnixNano</span><span class="p">())</span>
+
+<span class="w">  </span><span class="o">//</span><span class="w"> </span><span class="n">Fill</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">slice</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">random</span><span class="w"> </span><span class="n">int64</span><span class="w"> </span><span class="n">values</span><span class="w"> </span><span class="n">within</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">specified</span><span class="w"> </span><span class="nb">range</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="nb">range</span><span class="w"> </span><span class="n">slice</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">Generate</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">random</span><span class="w"> </span><span class="n">int64</span><span class="w"> </span><span class="n">within</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="nb">range</span><span class="w"> </span><span class="p">[</span><span class="nb">min</span><span class="p">,</span><span class="w"> </span><span class="nb">max</span><span class="p">)</span>
+<span class="w">    </span><span class="n">value</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="o">.</span><span class="n">Int63n</span><span class="p">(</span><span class="nb">max</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">min</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">min</span>
+<span class="w">    </span><span class="n">slice</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">slice</span>
+<span class="p">}</span>
+
+<span class="o">/*</span><span class="w"> </span><span class="n">We</span><span class="w"> </span><span class="n">generate</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">random</span><span class="w"> </span><span class="n">numbers</span><span class="w"> </span><span class="n">using</span><span class="w"> </span><span class="n">generateRandomInt64Slice</span><span class="w"> </span><span class="n">function</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">then</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">BST</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">perform</span><span class="w"> </span><span class="n">our</span><span class="w"> </span><span class="n">inorder</span><span class="w"> </span><span class="n">traversal</span>
+<span class="w">   </span><span class="n">If</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">same</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">sort</span><span class="w"> </span><span class="n">we</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="bp">true</span><span class="p">,</span><span class="w"> </span><span class="n">otherwise</span><span class="w"> </span><span class="bp">false</span><span class="w"> </span><span class="o">*/</span>
+<span class="k">func</span><span class="w"> </span><span class="n">generateBstAndValidateInOrderSortedTraversal</span><span class="p">()</span><span class="w"> </span><span class="nb nb-Type">bool</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">input</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">generateRandomInt64Slice</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">)</span>
+<span class="w">    </span><span class="n">expected</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">make</span><span class="p">([]</span><span class="n">int64</span><span class="p">,</span><span class="w"> </span><span class="n">len</span><span class="p">(</span><span class="n">input</span><span class="p">))</span>
+<span class="w">    </span><span class="n">copy</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span><span class="w"> </span><span class="n">input</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">sort</span><span class="o">.</span><span class="n">Slice</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span><span class="w"> </span><span class="k">func</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">)</span><span class="w"> </span><span class="nb nb-Type">bool</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">expected</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">expected</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+<span class="w">    </span><span class="p">})</span>
+
+<span class="w">    </span><span class="o">//</span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s2">&quot;Input: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"> </span>
+<span class="w">    </span><span class="o">//</span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s2">&quot;Expected: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">expected</span><span class="p">)</span>
+
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">generate</span><span class="w"> </span><span class="n">BST</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">root</span><span class="w"> </span><span class="o">*</span><span class="n">Node</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">_</span><span class="p">,</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="nb">range</span><span class="p">(</span><span class="n">input</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">addNode</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">store</span><span class="w"> </span><span class="n">actual</span><span class="w"> </span><span class="n">result</span>
+<span class="w">    </span><span class="n">actual</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">traverseInOrderModified</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+<span class="w">    </span><span class="o">//</span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s2">&quot;Actual: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">actual</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">reflect</span><span class="o">.</span><span class="n">DeepEqual</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span><span class="w"> </span><span class="n">actual</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Now for the final part, I implemented go-routines and channels to collect the results. I expected some improvement for an implementation which parallizes 10000 test cases (<em>and I actually timed the results using <code>time</code> shell command</em>). However, it seemed to run slower than a simple for-loop for 100000 test cases. Probably, because the underlying concurrency model is not good. I simply threw away all the executions into a goroutine.  </p>
+<p>A better concurrent approach probably would be to isolate generation of test cases at once in 1 goroutine, then using multiple go-routines to split the task of creating bsts, then finally one go routine to validate the result. This is all currently a hypothesis, but I would love to experiment it over the weekend and go over Rob Pike's actual concurrency videos again.  </p>
+<p>Anyway here's the method which evaluates the correctness of my BST implementation and traversal function  </p>
+<div class="highlight"><pre><span></span><code><span class="k">func</span><span class="w"> </span><span class="n">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="o">//</span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s2">&quot;Matches: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">generateBstAndValidateInOrderSortedTraversal</span><span class="p">())</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">numTestCases</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100000</span>
+<span class="w">    </span><span class="n">results</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">make</span><span class="p">(</span><span class="n">chan</span><span class="w"> </span><span class="nb nb-Type">bool</span><span class="p">,</span><span class="w"> </span><span class="n">numTestCases</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">numTestCases</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">go</span><span class="w"> </span><span class="k">func</span><span class="w"> </span><span class="p">(</span><span class="n">caseNum</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">results</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">generateBstAndValidateInOrderSortedTraversal</span><span class="p">()</span>
+<span class="w">        </span><span class="p">}(</span><span class="n">i</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">successfullyValidatedCases</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">numTestCases</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">result</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">results</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">successfullyValidatedCases</span><span class="o">++</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s2">&quot;Successfully validated cases&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">successfullyValidatedCases</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p><strong><em>I must say I'm finally enjoying programming again, now that I started learning golang. I think I got lost some part of myself chasing meaningless things for the last 5-6 years and forgot the joy of programming and exploring things. I'm sure you will have plenty of good topics to read about in upcoming posts</em></strong></p>
+    </div>
+</div>
+
+    </div>
+
+
+
+
+</body>
