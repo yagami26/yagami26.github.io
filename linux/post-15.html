@@ -1,0 +1,49 @@
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    
+        <title>Improving my Hyprland WM setup</title>
+    
+
+
+    
+
+    <link rel="icon" href="/assets/img/favicon.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700">
+    <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8000/theme/css/main.css">
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <div class="post">
+	<div class="post__back">
+    	<a href="http://127.0.0.1:8000">&lt;-- home</a>
+    </div>
+    <div class="post__title">
+    	<h1>Improving my Hyprland WM setup</h1>
+    </div>
+    <div class="post__date">
+    	<p>Feb 01, 2025, Posted in <a href="category/linux.html">Linux</a></p>
+    </div>
+    <div class="post__meta">
+    	<p></p>
+    </div>
+    <div class="post__content" ?="">
+	<p>In my quest for building a perfect minimalist linux system, I decided to not use a waybar. I believe it wastes a lot of screen space and doesn't really give a minimalist vibe. While waybar does look pretty sexy, I think it also wastes a lot of space. Here is how my waybar looked like <img alt="Image" src="http://127.0.0.1:8000/images/waybar-snapshot.png"></p>
+<p>You'll notice it has everything, a battery monitor (fish icon), cpu usage or memory usage stats, current time/date etc. It has a workspace switcher too, it was useful for me to know which is the current (1..9) workspace. It all looked cool, but I think these docks are inspired by mac, and I didn't like the idea of wasting screen space. Think about it when you're actually working on something, how often do you look on time or the topmost panels, I reckon rarely.  </p>
+<p>So I decided to ditch waybar completely from the configuration and instead use <a href="https://github.com/hyprwm/hyprland-plugins/tree/main/hyprexpo">hyprexpo</a> which is a hyprland plugin. I built the latest version of hyprland from git using yay and installed this hyprexpo plugin. </p>
+<p>The next thing I missed was having a notification system. But <code>dunst</code> is a good way to achieve notifications too. Here is a sample notification and the entire configuration can be seen in my dotfiles. <img alt="Image" src="http://127.0.0.1:8000/images/dunst-sample-notification.png">.  </p>
+<p>My first application during startup is <code>wtfutil</code> which will create a small dashboard on workspace 1, so I can read hackernews there, or check memory and cpu usage and also do stuff like keeping todo notes. It's very extensible and has its own configuration file.</p>
+<p>Overall I'm quite satisfied with how my system looks now. <iframe width="560" height="315" src="https://www.youtube.com/embed/GpBiVlPZjuc?si=U69VsYlenwwsEmK-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></p>
+    </div>
+</div>
+
+    </div>
+
+
+
+
+</body>
