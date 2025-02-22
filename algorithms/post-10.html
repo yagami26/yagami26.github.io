@@ -12,7 +12,7 @@
 
     <link rel="icon" href="/assets/img/favicon.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700">
-    <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8000/theme/css/main.css">
+    <link rel="stylesheet" type="text/css" href="https://yagami26.github.io/theme/css/main.css">
 </head>
 
 <body>
@@ -20,13 +20,13 @@
     <div class="wrapper">
         <div class="post">
 	<div class="post__back">
-    	<a href="http://127.0.0.1:8000">&lt;-- home</a>
+    	<a href="https://yagami26.github.io">&lt;-- home</a>
     </div>
     <div class="post__title">
     	<h1>InOrder Successor of a node in a BST [LeetCode Medium]</h1>
     </div>
     <div class="post__date">
-    	<p>Jun 17, 2024, Posted in <a href="category/algorithms.html">Algorithms</a></p>
+	    <p>Jun 17, 2024, Posted in <a href="https://yagami26.github.io/category/algorithms.html">Algorithms</a></p>
     </div>
     <div class="post__meta">
     	<p></p>
@@ -71,7 +71,7 @@
 <p>The second approach was a little trick and even though it may seem like an overkill I am still glad I attempted it this way as I really thought out of my comfort zone  </p>
 <p>I picked up the trick from problem <a href="https://leetcode.com/problems/validate-binary-search-tree/description/">validating a binary search tree</a>. You maintain a low &amp; high variables and don't recurse the subtrees where you know solution can't exist. Although now I realize that maintaining the high and low variables was not required, but it still prunes the left subtree where we know an inorder successor can't exist.  </p>
 <p>For eg see the below image where if we are searching for <code>13</code> as target node we can prune the subtree marked in red entirely. This solution was ~93% faster than other solutions which makes sense because we don't explore left subtree in some cases<br>
-<img alt="subtree" src="http://127.0.0.1:8000/images/bst-1.jpeg">  </p>
+<img alt="subtree" src="https://yagami26.github.io/images/bst-1.jpeg">  </p>
 <div class="highlight"><pre><span></span><code><span class="k">var</span><span class="w"> </span><span class="n">foundP</span><span class="w"> </span><span class="nb nb-Type">bool</span>
 <span class="k">var</span><span class="w"> </span><span class="n">answer</span><span class="w"> </span><span class="o">*</span><span class="n">TreeNode</span>
 
